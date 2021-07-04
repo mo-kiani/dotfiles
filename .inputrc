@@ -1,0 +1,4 @@
+# Use Vi(m) bindings for terminal input 
+set editing-mode vi
+set keymap vi-command
+

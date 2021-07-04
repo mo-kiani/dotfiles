@@ -2,3 +2,8 @@
 set editing-mode vi
 set keymap vi-command
 
+## Style the cursor based on the current vi(m) mode
+set show-mode-in-prompt on
+set vi-cmd-mode-string \1\e[4 q\2
+set vi-ins-mode-string \1\e[6 q\2
+

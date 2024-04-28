@@ -1,0 +1,16 @@
+# Include all config files from a designated location.
+# This is useful for keeping configurations out of version control in case they
+# contain sensitive information or belong only to specific systems.
+Include ./private/config/*
+
+# Get ssh-agent to remember keys for the sake of convenience and speed
+AddKeysToAgent yes
+
+# Default settings to fall back to
+Host *
+    # Might as well explicitly declare the well-known port of 22 for SSH
+    Port 22
+    # Give each host a different ssh key and use its host name as the key name
+    IdentityFile %d/.ssh/private/keys/%h
+    # Sometimes ssh encounters issues if there is no tty requested
+    RequestTTY auto

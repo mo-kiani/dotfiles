@@ -27,7 +27,11 @@ if [[ $- =~ i ]] && [[ -n "$SSH_TTY" ]] && [[ -z "$TMUX" ]]; then
   if ! command -v tmux &> /dev/null; then
     echo "Attempted to automatically open a tmux session for this interactive SSH terminal as $USER but tmux is not available on this host."
   else
-    tmux attach-session -t $USER || tmux new-session -s $USER
+    if [ -f ~/.tmux.conf-unsupported ]; then
+      tmux attach-session -t $USER || tmux -f /dev/null new-session -s $USER
+    else
+      tmux attach-session -t $USER || tmux new-session -s $USER
+    fi
     # and exit the SSH session/shell if the tmux session was exited (not detached)
     # This gives the user the option to detach for debugging issues outside of tmux over
     # SSH or adding more tmux sessions, etc., but still benefit from the convenience of

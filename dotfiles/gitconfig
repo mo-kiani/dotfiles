@@ -1,19 +1,20 @@
 # Use gpg signatures on commits and tags by default
 [commit]
-	gpgSign = true
+    gpgSign = true
 [tag]
-	gpgSign = true
+    gpgSign = true
 
 # Store the credentials requested by git in memory to reuse for 15 minutes
 [credential]
-	helper = cache --timeout 900
+    helper = cache --timeout 900
 
 # The recommended auto line-ending adjustment setting for *nix systems
 [core]
-	autocrlf = input
+    autocrlf = input
 
 # Include more configurations from a designated location.
 # This is useful for keeping configurations out of version control in case they
 # contain sensitive information or belong only to specific systems.
 [include]
-	path = .gitconfig-private/root
+    path = .gitconfig-private/root
+

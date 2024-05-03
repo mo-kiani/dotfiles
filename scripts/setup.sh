@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 # Require root/sudo permissions
 if [ "$EUID" -ne 0 ]; then
     echo "This script requires root/sudo permissions. Try: sudo !!"

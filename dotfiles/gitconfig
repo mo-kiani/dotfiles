@@ -3,6 +3,8 @@
     gpgSign = true
 [tag]
     gpgSign = true
+[log]
+    showSignature = true
 
 # Store the credentials requested by git in memory to reuse for 15 minutes
 [credential]

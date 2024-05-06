@@ -8,9 +8,16 @@ sudo true
 export REPO_PATH=$(realpath "$0")
 export REPO_PATH=$(dirname "$REPO_PATH")
 export REPO_PATH=$(dirname "$REPO_PATH")
+export CONFIG_SCRIPT_PATH=$(realpath -m "$1")
 export SETUP_DIR=~/.setup
 export BACKUP_DIR="$SETUP_DIR"/backups/"$(date '+%Z_%Y-%m-%d_%H-%M-%S')"
 export MOVE_OVER_FILES_PATH="$SETUP_DIR"/move_over_files
+
+echo "Will later use configuration source script (from first argument) at \"$CONFIG_SCRIPT_PATH\""
+if ! [ -e "$CONFIG_SCRIPT_PATH" ]; then
+    echo "Configuration source script \"$CONFIG_SCRIPT_PATH\" does not exist."
+    exit 1
+fi
 
 echo "Using home directory \"$HOME\""
 
@@ -24,7 +31,7 @@ mkdir -p "$SETUP_DIR"
 echo "Using \"$BACKUP_DIR\" as backup directory. If this script overwrites any files, try looking there."
 if [ -e "$BACKUP_DIR" ]; then
     echo "\"$BACKUP_DIR\" already exists. It's unsafe to continue because existing backups might get deleted. Try again in a few seconds."
-    exit 1
+    exit 2
 fi
 mkdir -p "$BACKUP_DIR"
 
@@ -38,7 +45,7 @@ if [ "$(lsb_release -is)" = 'Ubuntu' ]; then
     echo 'Identified Linux distribution name as "Ubuntu"'
 else
     echo "Could not identify Linux distribution. It is likely unsupported."
-    exit 2
+    exit 3
 fi
 
 export PACKAGE_MANAGER='NOT YET SET'
@@ -62,7 +69,7 @@ elif [ -f /etc/gentoo-release ]; then
     echo 'Identified package manager as "emerge"'
 else
     echo "Could not identify package manager. It is likely unsupported."
-    exit 3
+    exit 4
 fi
 
 update_package_manager () {
@@ -74,7 +81,7 @@ update_package_manager () {
             ;;
         *)
             echo "Update of package manager \"$PACKAGE_MANAGER\" not supported."
-            return 4
+            return 5
             ;;
     esac
     return 0
@@ -88,7 +95,7 @@ install_package () {
             ;;
         *)
             echo "Package installation with package manager \"$PACKAGE_MANAGER\" not supported."
-            return 5
+            return 6
             ;;
     esac
     return 0
@@ -103,16 +110,16 @@ backup_file () {
 
     if ! [ -e "$source" ]; then
         echo "File backup source \"$source\" does not exist."
-        return 6
+        return 7
     fi
 
     if ! [[ "$destination" == "$BACKUP_DIR"/* ]]; then
         echo "File backup destination \"$destination\" must be under backup directory \"$BACKUP_DIR\""
-        return 7
+        return 8
     fi
     if [ -e "$destination" ]; then
         echo "File backup destination \"$destination\" already exists. Operation considered unsafe."
-        return 8
+        return 9
     fi
 
     mkdir -p "$destination_dir"
@@ -128,16 +135,16 @@ deploy_file () {
 
     if ! [ -e "$source" ]; then
         echo "File deployment source \"$source\" does not exist."
-        return 9
+        return 10
     fi
 
     if ! [[ "$source" == "$REPO_PATH"/* ]]; then
         echo "File deployment source \"$source\" must be under repo \"$REPO_PATH\""
-        return 10
+        return 11
     fi
     if [[ "$destination" == "$REPO_PATH"*(/*) ]]; then
         echo "File deployment destination \"$destination\" must NOT be at or under repo \"$REPO_PATH\""
-        return 11
+        return 12
     fi
 
     mkdir -p "$destination_dir"
@@ -163,11 +170,11 @@ move_over_file () {
 
     if [[ "$source" == "$REPO_PATH"*(/*) ]]; then
         echo "File move-over source \"$source\" must NOT be at or under repo \"$REPO_PATH\""
-        return 12
+        return 13
     fi
     if [[ "$destination" == "$REPO_PATH"*(/*) ]]; then
         echo "File move-over destination \"$destination\" must NOT be at or under repo \"$REPO_PATH\""
-        return 13
+        return 14
     fi
 
     if [ -e "$destination" ]; then
@@ -180,7 +187,7 @@ move_over_file () {
         done < "$MOVE_OVER_FILES_PATH"
 
         echo "File move-over destination \"$destination\" already exists."
-        return 14
+        return 15
     fi
 
     echo "$destination" >> "$MOVE_OVER_FILES_PATH"
@@ -189,42 +196,8 @@ move_over_file () {
 }
 
 
+echo "Sourcing configuration script from \"$CONFIG_SCRIPT_PATH\""
 echo
-update_package_manager
+source "$CONFIG_SCRIPT_PATH"
 echo
-install_package curl
-echo
-install_package gpg
-echo
-install_package ssh
-echo
-install_package tmux
-echo
-install_package vim
-echo
-install_package git
-echo
-install_package tree || true
-echo
-install_package neofetch || true
-echo
-install_package figlet || true
-echo
-install_package unicode || true
-
-echo
-deploy_file dotfiles/inputrc ~/.inputrc
-echo
-move_over_file ~/.bashrc ~/.bashrc_default
-deploy_file dotfiles/bashrc ~/.bashrc
-echo
-deploy_file dotfiles/ssh/config ~/.ssh/config
-echo
-deploy_file dotfiles/tmux.conf ~/.tmux.conf
-echo
-deploy_file dotfiles/vimrc ~/.vimrc
-echo
-deploy_file dotfiles/gitconfig ~/.gitconfig
-echo
-deploy_file dotfiles/oh-my-posh/themes/mo.omp.json ~/.oh-my-posh/themes/custom/mo.omp.json
-echo
+echo "Done sourcing configuration script from \"$CONFIG_SCRIPT_PATH\""

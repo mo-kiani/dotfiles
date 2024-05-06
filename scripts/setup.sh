@@ -72,6 +72,13 @@ else
     exit 4
 fi
 
+# Set variable indicating whether bash is running in WSL
+export IM_IN_WSL=false
+if grep -qi -- '-WSL' /proc/sys/kernel/osrelease || test -f /proc/sys/fs/binfmt_misc/WSLInterop; then
+    echo "Identified this as a WSL (Windows Subsystem for Linux) environment."
+    export IM_IN_WSL=true
+fi
+
 update_package_manager () {
     echo "Updating \"$PACKAGE_MANAGER\""
     case "$PACKAGE_MANAGER" in

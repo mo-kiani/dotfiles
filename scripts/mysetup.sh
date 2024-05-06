@@ -35,3 +35,7 @@ echo
 deploy_file dotfiles/gitconfig ~/.gitconfig
 echo
 deploy_file dotfiles/oh-my-posh/themes/mo.omp.json ~/.oh-my-posh/themes/custom/mo.omp.json
+
+echo
+echo "Creating folder ~/.path, which bashrc will append to \$PATH"
+mkdir -p ~/.path

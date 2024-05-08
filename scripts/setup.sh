@@ -120,7 +120,10 @@ ensure_containing_dir () {
 ensure_inside () {
     local sub_path="$1"
     local sub_path_canonical=$(realpath -sm "$sub_path")
-    local sub_path_canonical=$(realpath -m "$sub_path_canonical")
+    local sub_dir=$(dirname "$sub_path_canonical")
+    local sub_dir=$(realpath -m "$sub_dir")
+    local sub_name=$(basename "$sub_path_canonical")
+    local sub_path_canonical="$sub_dir/$sub_name"
     local container="$2"
     local container_canonical=$(realpath -sm "$container")
     local container_canonical=$(realpath -m "$container_canonical")
@@ -135,7 +138,10 @@ ensure_inside () {
 ensure_outside () {
     local sub_path="$1"
     local sub_path_canonical=$(realpath -sm "$sub_path")
-    local sub_path_canonical=$(realpath -m "$sub_path_canonical")
+    local sub_dir=$(dirname "$sub_path_canonical")
+    local sub_dir=$(realpath -m "$sub_dir")
+    local sub_name=$(basename "$sub_path_canonical")
+    local sub_path_canonical="$sub_dir/$sub_name"
     local container="$2"
     local container_canonical=$(realpath -sm "$container")
     local container_canonical=$(realpath -m "$container_canonical")
@@ -217,6 +223,25 @@ move_over_file () {
     echo "$destination_canonical" >> "$MOVE_OVER_FILES_PATH"
     ensure_containing_dir "$destination"
     mv -n -T "$source" "$destination"
+    return 0
+}
+set_symlink () {
+    local target="$1"
+    local link="$2"
+
+    echo "Setting symlink \"$link\" => \"$target\""
+
+    ensure_outside "$target" "$REPO_PATH"
+    ensure_outside "$link" "$REPO_PATH"
+
+    if [ -e "$link" ]; then
+        local link_name=$(basename "$link")
+        backup_file "$link" "$BACKUP_DIR/symlinks/$link_name"
+        rm "$link"
+    fi
+
+    ensure_containing_dir "$link"
+    ln -s -T "$target" "$link"
     return 0
 }
 

@@ -160,7 +160,7 @@ deploy_file () {
         backup_file "$destination" "$BACKUP_DIR/$backup_rel_path"
         rm "$destination"
     fi
-    ln "$source" "$destination"
+    ln -s "$source" "$destination"
     return 0
 }
 

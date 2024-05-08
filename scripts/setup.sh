@@ -83,8 +83,8 @@ update_package_manager () {
     echo "Updating \"$PACKAGE_MANAGER\""
     case "$PACKAGE_MANAGER" in
         'apt')
-            sudo apt -qq update
-            sudo apt -qq upgrade
+            sudo apt -qq update -y
+            sudo apt -qq upgrade -y
             ;;
         *)
             echo "Update of package manager \"$PACKAGE_MANAGER\" not supported."

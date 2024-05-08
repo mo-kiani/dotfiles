@@ -108,97 +108,114 @@ install_package () {
     return 0
 }
 
-backup_file () {
-    local source=$(realpath -m "$1")
-    local destination=$(realpath -m "$2")
-    local destination_dir=$(dirname "$destination")
+ensure_containing_dir () {
+    local given_path="$1"
+    local canonical_path=$(realpath -sm "$given_path")
+    local containing_dir=$(dirname "$canonical_path")
 
-    echo "Backing up file at \"$source\" to \"$destination\""
+    mkdir -p "$containing_dir"
 
-    if ! [ -e "$source" ]; then
-        echo "File backup source \"$source\" does not exist."
+    return 0
+}
+ensure_inside () {
+    local sub_path="$1"
+    local sub_path_canonical=$(realpath -sm "$sub_path")
+    local sub_path_canonical=$(realpath -m "$sub_path_canonical")
+    local container="$2"
+    local container_canonical=$(realpath -sm "$container")
+    local container_canonical=$(realpath -m "$container_canonical")
+
+    if ! [[ "$sub_path_canonical" == "$container_canonical"/* ]]; then
+        echo "\"$sub_path\" (\"$sub_path_canonical\") must be under \"$container\" (\"$container_canonical\")"
         return 7
     fi
 
-    if ! [[ "$destination" == "$BACKUP_DIR"/* ]]; then
-        echo "File backup destination \"$destination\" must be under backup directory \"$BACKUP_DIR\""
+    return 0
+}
+ensure_outside () {
+    local sub_path="$1"
+    local sub_path_canonical=$(realpath -sm "$sub_path")
+    local sub_path_canonical=$(realpath -m "$sub_path_canonical")
+    local container="$2"
+    local container_canonical=$(realpath -sm "$container")
+    local container_canonical=$(realpath -m "$container_canonical")
+
+    if [[ "$sub_path_canonical" == "$container_canonical"*(/*) ]]; then
+        echo "\"$sub_path\" (\"$sub_path_canonical\") must NOT be at or under \"$container\" (\"$container_canonical\")"
         return 8
     fi
-    if [ -e "$destination" ]; then
-        echo "File backup destination \"$destination\" already exists. Operation considered unsafe."
+
+    return 0
+}
+backup_file () {
+    local source="$1"
+    local destination="$2"
+
+    echo "Backing up \"$source\" to \"$destination\""
+
+    ensure_inside "$destination" "$BACKUP_DIR"
+    ensure_containing_dir "$destination"
+
+    cp -a -T --backup='numbered' "$source" "$destination"
+    return 0
+}
+
+deploy_file () {
+    local source="$1"
+    local destination="$2"
+
+    echo "Deploying \"$source\" to \"$destination\""
+
+    if ! [ -e "$source" ]; then
+        echo "Deployment source \"$source\" does not exist."
         return 9
     fi
 
-    mkdir -p "$destination_dir"
-    cp -r "$source" "$destination"
-    return 0
-}
-deploy_file () {
-    local source=$(realpath -m "$1")
-    local destination=$(realpath -m "$2")
-    local destination_dir=$(dirname "$destination")
+    ensure_inside "$source" "$REPO_PATH"
+    ensure_outside "$destination" "$REPO_PATH"
 
-    echo "Deploying file from source \"$source\" to destination \"$destination\""
-
-    if ! [ -e "$source" ]; then
-        echo "File deployment source \"$source\" does not exist."
-        return 10
-    fi
-
-    if ! [[ "$source" == "$REPO_PATH"/* ]]; then
-        echo "File deployment source \"$source\" must be under repo \"$REPO_PATH\""
-        return 11
-    fi
-    if [[ "$destination" == "$REPO_PATH"*(/*) ]]; then
-        echo "File deployment destination \"$destination\" must NOT be at or under repo \"$REPO_PATH\""
-        return 12
-    fi
-
-    mkdir -p "$destination_dir"
     if [ -e "$destination" ]; then
         local backup_rel_path=$(realpath --relative-to="$REPO_PATH" "$source")
-        backup_file "$destination" "$BACKUP_DIR/$backup_rel_path"
+        backup_file "$destination" "$BACKUP_DIR/deployment/$backup_rel_path"
         rm "$destination"
     fi
-    ln -s "$source" "$destination"
+
+    ensure_containing_dir "$destination"
+
+    ln -sT "$source" "$destination"
     return 0
 }
-
 move_over_file () {
-    local source=$(realpath -m "$1")
-    local destination=$(realpath -m "$2")
+    local source="$1"
+    local destination="$2"
+    local destination_canonical=$(realpath -m "$destination")
 
-    echo "Moving file over from \"$source\" to \"$destination\""
+    echo "Moving \"$source\" over to \"$destination\""
 
     if ! [ -e "$source" ]; then
-        echo "File move-over source \"$source\" does not exist. Nothing to move over."
+        echo "Move-over source \"$source\" does not exist. Nothing to move over."
         return 0
     fi
 
-    if [[ "$source" == "$REPO_PATH"*(/*) ]]; then
-        echo "File move-over source \"$source\" must NOT be at or under repo \"$REPO_PATH\""
-        return 13
-    fi
-    if [[ "$destination" == "$REPO_PATH"*(/*) ]]; then
-        echo "File move-over destination \"$destination\" must NOT be at or under repo \"$REPO_PATH\""
-        return 14
-    fi
+    ensure_outside "$source" "$REPO_PATH"
+    ensure_outside "$destination" "$REPO_PATH"
 
     if [ -e "$destination" ]; then
         local line
         while read line; do
-            if [ "$line" = "$destination" ]; then
-                echo "File move-over to destination \"$destination\" previously done."
+            if [ "$line" = "$destination_canonical" ]; then
+                echo "Move-over to destination \"$destination\" (\"$destination_canonical\") previously done."
                 return 0
             fi
         done < "$MOVE_OVER_FILES_PATH"
 
-        echo "File move-over destination \"$destination\" already exists."
-        return 15
+        local destination_name=$(basename "$destination")
+        backup_file "$destination" "$BACKUP_DIR/move-overs/$destination_name"
+        rm "$destination"
     fi
 
-    echo "$destination" >> "$MOVE_OVER_FILES_PATH"
-    mv "$source" "$destination"
+    echo "$destination_canonical" >> "$MOVE_OVER_FILES_PATH"
+    mv -n -T "$source" "$destination"
     return 0
 }
 

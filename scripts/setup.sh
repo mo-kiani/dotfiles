@@ -215,6 +215,7 @@ move_over_file () {
     fi
 
     echo "$destination_canonical" >> "$MOVE_OVER_FILES_PATH"
+    ensure_containing_dir "$destination"
     mv -n -T "$source" "$destination"
     return 0
 }

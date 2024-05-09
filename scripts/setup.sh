@@ -180,7 +180,7 @@ deploy_file () {
     ensure_inside "$source" "$REPO_PATH" || return
     ensure_outside "$destination" "$REPO_PATH" || return
 
-    if [ -e "$destination" ]; then
+    if [ -e "$destination" ] || [ -L "$destination" ]; then
         local backup_rel_path=$(realpath --relative-to="$REPO_PATH" "$source")
         backup_file "$destination" "$BACKUP_DIR/deployment/$backup_rel_path" || return
         rm "$destination"
@@ -206,7 +206,7 @@ move_over_file () {
     ensure_outside "$source" "$REPO_PATH" || return
     ensure_outside "$destination" "$REPO_PATH" || return
 
-    if [ -e "$destination" ]; then
+    if [ -e "$destination" ] || [ -L "$destination" ]; then
         local line
         while read line; do
             if [ "$line" = "$destination_canonical" ]; then
@@ -234,7 +234,7 @@ set_symlink () {
     ensure_outside "$target" "$REPO_PATH" || return
     ensure_outside "$link" "$REPO_PATH" || return
 
-    if [ -e "$link" ]; then
+    if [ -e "$link" ] || [ -L "$destination" ]; then
         local link_name=$(basename "$link")
         backup_file "$link" "$BACKUP_DIR/symlinks/$link_name" || return
         rm "$link"

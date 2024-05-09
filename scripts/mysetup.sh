@@ -19,6 +19,10 @@ echo
 install_package figlet || true
 echo
 install_package unicode || true
+if [ "$IM_IN_WSL" = 'true' ]; then
+    echo
+    install_package wslu
+fi
 
 echo
 deploy_file "$REPO_PATH/dotfiles/inputrc" ~/.inputrc
@@ -39,3 +43,9 @@ deploy_file "$REPO_PATH/dotfiles/oh-my-posh/themes" ~/.oh-my-posh/themes/custom
 echo
 echo "Creating folder ~/.path, which bashrc will append to \$PATH"
 mkdir -p ~/.path
+
+if [ "$IM_IN_WSL" = 'true' ]; then
+    echo
+    export MY_WINDOWS_HOME_FOLDER=$(wslpath "$(wslvar 'UserProfile')")
+    set_symlink "$MY_WINDOWS_HOME_FOLDER" ~/win
+fi

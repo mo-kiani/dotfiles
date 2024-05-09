@@ -16,7 +16,7 @@ export MOVE_OVER_FILES_PATH="$SETUP_DIR"/move_over_files
 echo "Will later use configuration source script (from first argument) at \"$CONFIG_SCRIPT_PATH\""
 if ! [ -e "$CONFIG_SCRIPT_PATH" ]; then
     echo "Configuration source script \"$CONFIG_SCRIPT_PATH\" does not exist."
-    exit 1
+    return 1 2>/dev/null; exit 1
 fi
 
 echo "Using home directory \"$HOME\""
@@ -31,7 +31,7 @@ mkdir -p "$SETUP_DIR"
 echo "Using \"$BACKUP_DIR\" as backup directory. If this script overwrites any files, try looking there."
 if [ -e "$BACKUP_DIR" ]; then
     echo "\"$BACKUP_DIR\" already exists. It's unsafe to continue because existing backups might get deleted. Try again in a few seconds."
-    exit 2
+    return 2 2>/dev/null; exit 2
 fi
 mkdir -p "$BACKUP_DIR"
 
@@ -45,7 +45,7 @@ if [ "$(lsb_release -is)" = 'Ubuntu' ]; then
     echo 'Identified Linux distribution name as "Ubuntu"'
 else
     echo "Could not identify Linux distribution. It is likely unsupported."
-    exit 3
+    return 3 2>/dev/null; exit 3
 fi
 
 export PACKAGE_MANAGER='NOT YET SET'
@@ -69,7 +69,7 @@ elif [ -f /etc/gentoo-release ]; then
     echo 'Identified package manager as "emerge"'
 else
     echo "Could not identify package manager. It is likely unsupported."
-    exit 4
+    return 4 2>/dev/null; exit 4
 fi
 
 # Set variable indicating whether bash is running in WSL

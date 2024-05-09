@@ -1,24 +1,16 @@
 #!/bin/bash
 
-set -e
-set -o pipefail
-
 # Ensure sudo permissions are granted by the invoking user before starting
 sudo true
 
-export REPO_PATH=$(realpath "$0")
+export REPO_PATH=$(realpath "$BASH_SOURCE")
 export REPO_PATH=$(dirname "$REPO_PATH")
 export REPO_PATH=$(dirname "$REPO_PATH")
-export CONFIG_SCRIPT_PATH=$(realpath -m "$1")
+export CONFIG_SCRIPT_PATH_AS_GIVEN="$1"
+export CONFIG_SCRIPT_PATH=$(realpath -m "$CONFIG_SCRIPT_PATH_AS_GIVEN" 2>/dev/null)
 export SETUP_DIR=~/.setup
 export BACKUP_DIR="$SETUP_DIR"/backups/"$(date '+%Z_%Y-%m-%d_%H-%M-%S')"
 export MOVE_OVER_FILES_PATH="$SETUP_DIR"/move_over_files
-
-echo "Will later use configuration source script (from first argument) at \"$CONFIG_SCRIPT_PATH\""
-if ! [ -e "$CONFIG_SCRIPT_PATH" ]; then
-    echo "Configuration source script \"$CONFIG_SCRIPT_PATH\" does not exist."
-    return 1 2>/dev/null; exit 1
-fi
 
 echo "Using home directory \"$HOME\""
 
@@ -32,7 +24,7 @@ mkdir -p "$SETUP_DIR"
 echo "Using \"$BACKUP_DIR\" as backup directory. If this script overwrites any files, try looking there."
 if [ -e "$BACKUP_DIR" ]; then
     echo "\"$BACKUP_DIR\" already exists. It's unsafe to continue because existing backups might get deleted. Try again in a few seconds."
-    return 2 2>/dev/null; exit 2
+    return 2 2>/dev/null || exit 2
 fi
 mkdir -p "$BACKUP_DIR"
 
@@ -46,7 +38,7 @@ if [ "$(lsb_release -is)" = 'Ubuntu' ]; then
     echo 'Identified Linux distribution name as "Ubuntu"'
 else
     echo "Could not identify Linux distribution. It is likely unsupported."
-    return 3 2>/dev/null; exit 3
+    return 3 2>/dev/null || exit 3
 fi
 
 export PACKAGE_MANAGER='NOT YET SET'
@@ -70,7 +62,7 @@ elif [ -f /etc/gentoo-release ]; then
     echo 'Identified package manager as "emerge"'
 else
     echo "Could not identify package manager. It is likely unsupported."
-    return 4 2>/dev/null; exit 4
+    return 4 2>/dev/null || exit 4
 fi
 
 # Set variable indicating whether bash is running in WSL
@@ -245,6 +237,18 @@ set_symlink () {
     return
 }
 
+
+return 0 2>/dev/null  # Only do the rest if not sourced
+
+set -e
+set -o pipefail
+
+echo
+echo "Using configuration source script \"$CONFIG_SCRIPT_PATH_AS_GIVEN\" (from first argument) resolved to \"$CONFIG_SCRIPT_PATH\""
+if ! [ -e "$CONFIG_SCRIPT_PATH" ]; then
+    echo "Configuration source script \"$CONFIG_SCRIPT_PATH\" does not exist."
+    exit 1
+fi
 
 echo "Sourcing configuration script from \"$CONFIG_SCRIPT_PATH\""
 echo

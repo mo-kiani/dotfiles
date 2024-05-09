@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -e
+set -o pipefail
 
 # Ensure sudo permissions are granted by the invoking user before starting
 sudo true
@@ -83,15 +84,14 @@ update_package_manager () {
     echo "Updating \"$PACKAGE_MANAGER\""
     case "$PACKAGE_MANAGER" in
         'apt')
-            sudo apt -qq update -y
-            sudo apt -qq upgrade -y
+            sudo apt -qq update -y && sudo apt -qq upgrade -y
             ;;
         *)
             echo "Update of package manager \"$PACKAGE_MANAGER\" not supported."
             return 5
             ;;
     esac
-    return 0
+    return
 }
 install_package () {
     local package_name="$1"
@@ -105,7 +105,7 @@ install_package () {
             return 6
             ;;
     esac
-    return 0
+    return
 }
 
 ensure_containing_dir () {
@@ -115,7 +115,7 @@ ensure_containing_dir () {
 
     mkdir -p "$containing_dir"
 
-    return 0
+    return
 }
 ensure_inside () {
     local sub_path="$1"
@@ -159,11 +159,11 @@ backup_file () {
 
     echo "Backing up \"$source\" to \"$destination\""
 
-    ensure_inside "$destination" "$BACKUP_DIR"
+    ensure_inside "$destination" "$BACKUP_DIR" || return
     ensure_containing_dir "$destination"
 
     cp -a -T --backup='numbered' "$source" "$destination"
-    return 0
+    return
 }
 
 deploy_file () {
@@ -177,19 +177,19 @@ deploy_file () {
         return 9
     fi
 
-    ensure_inside "$source" "$REPO_PATH"
-    ensure_outside "$destination" "$REPO_PATH"
+    ensure_inside "$source" "$REPO_PATH" || return
+    ensure_outside "$destination" "$REPO_PATH" || return
 
     if [ -e "$destination" ]; then
         local backup_rel_path=$(realpath --relative-to="$REPO_PATH" "$source")
-        backup_file "$destination" "$BACKUP_DIR/deployment/$backup_rel_path"
+        backup_file "$destination" "$BACKUP_DIR/deployment/$backup_rel_path" || return
         rm "$destination"
     fi
 
     ensure_containing_dir "$destination"
 
     ln -sT "$source" "$destination"
-    return 0
+    return
 }
 move_over_file () {
     local source="$1"
@@ -203,8 +203,8 @@ move_over_file () {
         return 0
     fi
 
-    ensure_outside "$source" "$REPO_PATH"
-    ensure_outside "$destination" "$REPO_PATH"
+    ensure_outside "$source" "$REPO_PATH" || return
+    ensure_outside "$destination" "$REPO_PATH" || return
 
     if [ -e "$destination" ]; then
         local line
@@ -216,14 +216,14 @@ move_over_file () {
         done < "$MOVE_OVER_FILES_PATH"
 
         local destination_name=$(basename "$destination")
-        backup_file "$destination" "$BACKUP_DIR/move-overs/$destination_name"
+        backup_file "$destination" "$BACKUP_DIR/move-overs/$destination_name" || return
         rm "$destination"
     fi
 
     echo "$destination_canonical" >> "$MOVE_OVER_FILES_PATH"
     ensure_containing_dir "$destination"
     mv -n -T "$source" "$destination"
-    return 0
+    return
 }
 set_symlink () {
     local target="$1"
@@ -231,18 +231,18 @@ set_symlink () {
 
     echo "Setting symlink \"$link\" => \"$target\""
 
-    ensure_outside "$target" "$REPO_PATH"
-    ensure_outside "$link" "$REPO_PATH"
+    ensure_outside "$target" "$REPO_PATH" || return
+    ensure_outside "$link" "$REPO_PATH" || return
 
     if [ -e "$link" ]; then
         local link_name=$(basename "$link")
-        backup_file "$link" "$BACKUP_DIR/symlinks/$link_name"
+        backup_file "$link" "$BACKUP_DIR/symlinks/$link_name" || return
         rm "$link"
     fi
 
     ensure_containing_dir "$link"
     ln -s -T "$target" "$link"
-    return 0
+    return
 }
 
 

@@ -55,3 +55,8 @@ curl -s https://ohmyposh.dev/install.sh | bash -s -- -d ~/.oh-my-posh -t ~/.oh-m
 deploy_file "$REPO_PATH/dotfiles/oh-my-posh/themes" ~/.oh-my-posh/themes/custom
 set_symlink custom/mo.omp.json ~/.oh-my-posh/themes/default.omp.json
 set_symlink ~/.oh-my-posh/oh-my-posh ~/.path/oh-my-posh
+
+echo
+echo "Downloading and signing GPG key for GitHub web-flow"
+curl -s https://github.com/web-flow.gpg | gpg --import
+gpg --sign-key BB952194

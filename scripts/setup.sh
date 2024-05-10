@@ -237,6 +237,31 @@ set_symlink () {
     return
 }
 
+prompt_choice () {
+    local var_name="$1"
+    local prompt="$2"
+    shift 2
+    local menu=$(local IFS='|' && echo "$*")
+
+    while : ; do
+        read -p "$prompt[$menu]: " "$var_name"
+
+        local option
+        local found='false'
+        for option in "$@"; do
+            if [ "$option" = "${!var_name}" ]; then
+                found='true'
+            fi
+        done
+
+        if [ "$found" = 'true' ]; then
+            break
+        else
+            echo "Choice '${!var_name}' invalid. Please choose one of: $menu"
+        fi
+    done
+}
+
 
 return 0 2>/dev/null  # Only do the rest if not sourced
 

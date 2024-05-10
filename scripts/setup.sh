@@ -217,6 +217,9 @@ move_over_file () {
     mv -n -T "$source" "$destination"
     return
 }
+reset_move_overs () {
+    > "$MOVE_OVER_FILES_PATH"
+}
 set_symlink () {
     local target="$1"
     local link="$2"

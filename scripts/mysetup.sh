@@ -37,8 +37,6 @@ echo
 deploy_file "$REPO_PATH/dotfiles/vimrc" ~/.vimrc
 echo
 deploy_file "$REPO_PATH/dotfiles/gitconfig" ~/.gitconfig
-echo
-deploy_file "$REPO_PATH/dotfiles/oh-my-posh/themes" ~/.oh-my-posh/themes/custom
 
 echo
 echo "Creating folder ~/.path, which bashrc will append to \$PATH"
@@ -49,3 +47,11 @@ if [ "$IM_IN_WSL" = 'true' ]; then
     export MY_WINDOWS_HOME_FOLDER=$(wslpath "$(wslvar 'UserProfile')")
     set_symlink "$MY_WINDOWS_HOME_FOLDER" ~/win
 fi
+
+echo
+echo "Installing 'Oh My Posh!'"
+mkdir -p ~/.oh-my-posh
+curl -s https://ohmyposh.dev/install.sh | bash -s -- -d ~/.oh-my-posh -t ~/.oh-my-posh/themes/built-in
+deploy_file "$REPO_PATH/dotfiles/oh-my-posh/themes" ~/.oh-my-posh/themes/custom
+set_symlink custom/mo.omp.json ~/.oh-my-posh/themes/default.omp.json
+set_symlink ~/.oh-my-posh/oh-my-posh ~/.path/oh-my-posh

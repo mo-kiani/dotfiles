@@ -226,7 +226,6 @@ set_symlink () {
 
     echo "Setting symlink \"$link\" => \"$target\""
 
-    ensure_outside "$target" "$REPO_PATH" || return
     ensure_outside "$link" "$REPO_PATH" || return
 
     if [ -e "$link" ] || [ -L "$destination" ]; then

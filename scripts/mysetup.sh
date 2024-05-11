@@ -52,9 +52,14 @@ echo "Creating folder ~/.path, which bashrc will append to \$PATH"
 mkdir -p ~/.path
 
 if [ "$IM_IN_WSL" = 'true' ]; then
-    echo
     export MY_WINDOWS_HOME_FOLDER=$(wslpath "$(wslvar 'UserProfile')")
+    export MY_WINDOWS_TERMINAL_FOLDER=$(wslpath "$(wslvar 'LocalAppData')")/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState
+    echo
     set_symlink "$MY_WINDOWS_HOME_FOLDER" ~/win
+    echo
+    deploy_file_wsl "$REPO_PATH/dotfiles/wt/settings.json" "$MY_WINDOWS_TERMINAL_FOLDER/settings.json"
+    echo
+    deploy_file_wsl "$REPO_PATH/assets/Tux.png" "$MY_WINDOWS_HOME_FOLDER/Setup/Tux.png"
 fi
 
 echo

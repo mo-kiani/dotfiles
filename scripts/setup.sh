@@ -183,6 +183,31 @@ deploy_file () {
     ln -sT "$source" "$destination"
     return
 }
+deploy_file_wsl () {
+    local source="$1"
+    local destination="$2"
+
+    echo "Deploying \"$source\" to \"$destination\" in WSL -> Windows style"
+
+    if ! [ -e "$source" ]; then
+        echo "Deployment source \"$source\" does not exist."
+        return 10
+    fi
+
+    ensure_inside "$source" "$REPO_PATH" || return
+    ensure_outside "$destination" "$REPO_PATH" || return
+
+    if [ -e "$destination" ] || [ -L "$destination" ]; then
+        local backup_rel_path=$(realpath --relative-to="$REPO_PATH" "$source")
+        backup_file "$destination" "$BACKUP_DIR/deployment/$backup_rel_path" || return
+        rm "$destination"
+    fi
+
+    ensure_containing_dir "$destination"
+
+    cp -a -T "$source" "$destination"
+    return
+}
 move_over_file () {
     local source="$1"
     local destination="$2"

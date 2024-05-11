@@ -60,3 +60,8 @@ echo
 echo "Downloading and signing GPG key for GitHub web-flow"
 cat "$REPO_PATH/keys/web-flow.gpg" | gpg --import
 gpg --sign-key BB952194 || echo "Failed to sign GitHub web-flow's GPG key"
+
+echo
+echo "Downloading and signing personal GPG key"
+cat "$REPO_PATH/keys/mo-kiani.gpg" | gpg --import
+gpg --sign-key 78A6E78A || echo "Failed to sign personal GPG key"

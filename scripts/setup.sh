@@ -273,7 +273,7 @@ prompt_choice () {
 
     while : ; do
         local ret=0
-        read -t 300 -p "$prompt[$menu]: " "$var_name" || local ret=$?
+        read -e -t 300 -p "$prompt[$menu]: " "$var_name" || local ret=$?
         if [ "$ret" -gt 128 ]; then
             echo
             export "$var_name"="$default_value"

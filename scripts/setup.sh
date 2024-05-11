@@ -267,11 +267,19 @@ set_symlink () {
 prompt_choice () {
     local var_name="$1"
     local prompt="$2"
+    local default_value="$3"
     shift 2
     local menu=$(local IFS='|' && echo "$*")
 
     while : ; do
-        read -p "$prompt[$menu]: " "$var_name"
+        local ret=0
+        read -t 300 -p "$prompt[$menu]: " "$var_name" || local ret=$?
+        if [ "$ret" -gt 128 ]; then
+            echo
+            export "$var_name"="$default_value"
+            echo "Timeout: using first option \"${!var_name}\" as default"
+            break
+        fi
 
         local option
         local found='false'

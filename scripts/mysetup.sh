@@ -71,3 +71,21 @@ echo
 echo "Importing and signing personal GPG key"
 cat "$REPO_PATH/keys/mo-kiani.gpg" | gpg --import
 gpg --sign-key 78A6E78A || echo "Failed to sign personal GPG key"
+
+echo
+echo "Preparing vim"
+echo "Creating folder structure under ~/.vim/"
+mkdir -p ~/.vim/{swap,backup}
+mkdir -p ~/.vim/pack/{colorschemes,plugins}/{start,opt}
+if ! [ -d ~/.vim/pack/colorschemes/start/gruvbox ]; then
+    echo "Installing vim colorscheme 'gruvbox'"
+    git clone git@github.com:morhetz/gruvbox.git ~/.vim/pack/colorschemes/start/gruvbox
+else
+    echo "Vim colorscheme 'gruvbox' already installed"
+fi
+if ! [ -d ~/.vim/pack/plugins/start/vim-airline ]; then
+    echo "Installing vim plugin 'vim-airline'"
+    git clone git@github.com:vim-airline/vim-airline.git ~/.vim/pack/plugins/start/vim-airline
+else
+    echo "Vim plugin 'vim-airline' already installed"
+fi

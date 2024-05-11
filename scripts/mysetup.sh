@@ -12,6 +12,12 @@ install_package vim
 echo
 install_package git
 echo
+install_package python3
+echo
+install_package python3-pip
+echo
+install_package python3-venv
+echo
 install_package tree || true
 echo
 install_package neofetch || true

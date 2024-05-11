@@ -58,5 +58,5 @@ set_symlink ~/.oh-my-posh/oh-my-posh ~/.path/oh-my-posh
 
 echo
 echo "Downloading and signing GPG key for GitHub web-flow"
-curl -s https://github.com/web-flow.gpg | gpg --import
+cat "$REPO_PATH/keys/web-flow.gpg" | gpg --import
 gpg --sign-key BB952194 || echo "Failed to sign GitHub web-flow's GPG key"

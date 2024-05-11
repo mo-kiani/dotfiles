@@ -43,6 +43,9 @@ echo
 deploy_file "$REPO_PATH/dotfiles/vimrc" ~/.vimrc
 echo
 deploy_file "$REPO_PATH/dotfiles/gitconfig" ~/.gitconfig
+echo "Ensuring git config files included in \"~/.gitconfig\" exist (\"~/.gitconfig-private/root\")"
+mkdir -p ~/.gitconfig-private
+touch ~/.gitconfig-private/root
 
 echo
 echo "Creating folder ~/.path, which bashrc will append to \$PATH"

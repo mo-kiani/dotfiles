@@ -57,11 +57,11 @@ set_symlink custom/mo.omp.json ~/.oh-my-posh/themes/default.omp.json
 set_symlink ~/.oh-my-posh/oh-my-posh ~/.path/oh-my-posh
 
 echo
-echo "Downloading and signing GPG key for GitHub web-flow"
+echo "Importing and signing GPG key for GitHub web-flow"
 cat "$REPO_PATH/keys/web-flow.gpg" | gpg --import
 gpg --sign-key BB952194 || echo "Failed to sign GitHub web-flow's GPG key"
 
 echo
-echo "Downloading and signing personal GPG key"
+echo "Importing and signing personal GPG key"
 cat "$REPO_PATH/keys/mo-kiani.gpg" | gpg --import
 gpg --sign-key 78A6E78A || echo "Failed to sign personal GPG key"

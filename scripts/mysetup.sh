@@ -100,3 +100,11 @@ if [ "$CHOICE_NERD_FONT" = 'yes' ]; then
 elif [ -e ~/.nerdfont_on ]; then
     rm ~/.nerdfont_on
 fi
+
+echo
+prompt_choice CHOICE_TMUX "Does your tmux config support tmux version [$(tmux -V)]?" yes no
+if [ "$CHOICE_TMUX" = 'no' ]; then
+    touch ~/.tmux.conf-unsupported
+elif [ -e ~/.tmux.conf-unsupported ]; then
+    rm ~/.tmux.conf-unsupported
+fi

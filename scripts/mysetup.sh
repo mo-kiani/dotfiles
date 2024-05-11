@@ -92,3 +92,11 @@ if ! [ -d ~/.vim/pack/plugins/start/vim-airline ]; then
 else
     echo "Vim plugin 'vim-airline' already installed"
 fi
+
+echo
+prompt_choice CHOICE_NERD_FONT 'Are you using a Nerd Font?' yes no
+if [ "$CHOICE_NERD_FONT" = 'yes' ]; then
+    touch ~/.nerdfont_on
+elif [ -e ~/.nerdfont_on ]; then
+    rm ~/.nerdfont_on
+fi

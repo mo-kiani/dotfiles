@@ -6,6 +6,10 @@
 [log]
     showSignature = true
 
+# Set `git pull` to rebase by default to keep history tidy of unnecessary merge commits
+[pull]
+    rebase = true
+
 # Store the credentials requested by git in memory to reuse for 15 minutes
 [credential]
     helper = cache --timeout 900

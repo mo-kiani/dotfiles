@@ -180,7 +180,7 @@ deploy_file () {
 
     ensure_containing_dir "$destination"
 
-    ln -sT "$source" "$destination"
+    ln -rsT "$source" "$destination"
     return
 }
 deploy_file_wsl () {

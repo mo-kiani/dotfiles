@@ -31,18 +31,18 @@ if [ "$IM_IN_WSL" = 'true' ]; then
 fi
 
 echo
-deploy_file "$REPO_PATH/dotfiles/inputrc" ~/.inputrc
+deploy_file dotfiles/inputrc ~/.inputrc
 echo
 move_over_file ~/.bashrc ~/.bashrc_default
-deploy_file "$REPO_PATH/dotfiles/bashrc" ~/.bashrc
+deploy_file dotfiles/bashrc ~/.bashrc
 echo
-deploy_file "$REPO_PATH/dotfiles/ssh/config" ~/.ssh/config
+deploy_file dotfiles/ssh/config ~/.ssh/config
 echo
-deploy_file "$REPO_PATH/dotfiles/tmux.conf" ~/.tmux.conf
+deploy_file dotfiles/tmux.conf ~/.tmux.conf
 echo
-deploy_file "$REPO_PATH/dotfiles/vimrc" ~/.vimrc
+deploy_file dotfiles/vimrc ~/.vimrc
 echo
-deploy_file "$REPO_PATH/dotfiles/gitconfig" ~/.gitconfig
+deploy_file dotfiles/gitconfig ~/.gitconfig
 echo "Ensuring git config files included in \"~/.gitconfig\" exist (\"~/.gitconfig-private/root\")"
 mkdir -p ~/.gitconfig-private
 touch ~/.gitconfig-private/root
@@ -57,27 +57,27 @@ if [ "$IM_IN_WSL" = 'true' ]; then
     echo
     set_symlink "$MY_WINDOWS_HOME_FOLDER" ~/win
     echo
-    deploy_file_wsl "$REPO_PATH/dotfiles/wt/settings.json" "$MY_WINDOWS_TERMINAL_FOLDER/settings.json"
+    deploy_file_wsl dotfiles/wt/settings.json "$MY_WINDOWS_TERMINAL_FOLDER/settings.json"
     echo
-    deploy_file_wsl "$REPO_PATH/assets/Tux.png" "$MY_WINDOWS_HOME_FOLDER/Setup/Tux.png"
+    deploy_file_wsl assets/Tux.png "$MY_WINDOWS_HOME_FOLDER/Setup/Tux.png"
 fi
 
 echo
 echo "Installing 'Oh My Posh!'"
 mkdir -p ~/.oh-my-posh
 curl -s https://ohmyposh.dev/install.sh | bash -s -- -d ~/.oh-my-posh -t ~/.oh-my-posh/themes/built-in
-deploy_file "$REPO_PATH/dotfiles/oh-my-posh/themes" ~/.oh-my-posh/themes/custom
+deploy_file dotfiles/oh-my-posh/themes ~/.oh-my-posh/themes/custom
 set_symlink custom/mo.omp.json ~/.oh-my-posh/themes/default.omp.json
 set_symlink ~/.oh-my-posh/oh-my-posh ~/.path/oh-my-posh
 
 echo
 echo "Importing and signing GPG key for GitHub web-flow"
-cat "$REPO_PATH/keys/web-flow.gpg" | gpg --import
+cat keys/web-flow.gpg | gpg --import
 gpg --sign-key BB952194 || echo "Failed to sign GitHub web-flow's GPG key"
 
 echo
 echo "Importing and signing personal GPG key"
-cat "$REPO_PATH/keys/mo-kiani.gpg" | gpg --import
+cat keys/mo-kiani.gpg | gpg --import
 gpg --sign-key 78A6E78A || echo "Failed to sign personal GPG key"
 
 echo

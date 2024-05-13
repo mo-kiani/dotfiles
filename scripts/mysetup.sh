@@ -99,7 +99,7 @@ else
 fi
 
 echo
-prompt_choice CHOICE_NERD_FONT 'Are you using a Nerd Font?' yes no
+prompt_choice CHOICE_NERD_FONT 'Are you using a Nerd Font?' no yes
 if [ "$CHOICE_NERD_FONT" = 'yes' ]; then
     touch ~/.nerdfont_on
 elif [ -e ~/.nerdfont_on ]; then
@@ -107,7 +107,7 @@ elif [ -e ~/.nerdfont_on ]; then
 fi
 
 echo
-prompt_choice CHOICE_TMUX "Does your tmux config support tmux version [$(tmux -V)]?" yes no
+prompt_choice CHOICE_TMUX "Does your tmux config support tmux version [$(tmux -V)]?" no yes
 if [ "$CHOICE_TMUX" = 'no' ]; then
     touch ~/.tmux.conf-unsupported
 elif [ -e ~/.tmux.conf-unsupported ]; then

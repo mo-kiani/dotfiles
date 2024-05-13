@@ -14,10 +14,6 @@ export MOVE_OVER_FILES_PATH="$SETUP_DIR"/move_over_files
 
 echo "Using home directory \"$HOME\""
 
-# Always run this script with the repo's physical path as its working directory
-echo "Running from absolute physical path \"$REPO_PATH\""
-cd -P "$REPO_PATH"
-
 echo "Storing related data in \"$SETUP_DIR\""
 mkdir -p "$SETUP_DIR"
 
@@ -310,8 +306,9 @@ if ! [ -e "$CONFIG_SCRIPT_PATH" ]; then
     exit 1
 fi
 
-echo "Sourcing configuration script from \"$CONFIG_SCRIPT_PATH\""
+echo "Sourcing configuration script at \"$CONFIG_SCRIPT_PATH\" with \"$REPO_PATH\" as working directory"
+cd -P "$REPO_PATH"
 echo
 source "$CONFIG_SCRIPT_PATH"
 echo
-echo "Done sourcing configuration script from \"$CONFIG_SCRIPT_PATH\""
+echo "Done sourcing configuration script at \"$CONFIG_SCRIPT_PATH\""

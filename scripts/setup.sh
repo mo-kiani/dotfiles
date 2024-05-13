@@ -145,7 +145,7 @@ ensure_outside () {
 
     return 0
 }
-backup_file () {
+backup_item () {
     local source="$1"
     local destination="$2"
 
@@ -158,7 +158,7 @@ backup_file () {
     return
 }
 
-deploy_file () {
+deploy_item () {
     local source="$1"
     local destination="$2"
 
@@ -174,7 +174,7 @@ deploy_file () {
 
     if [ -e "$destination" ] || [ -L "$destination" ]; then
         local backup_rel_path=$(realpath --relative-to="$REPO_PATH" "$source")
-        backup_file "$destination" "$BACKUP_DIR/deployment/$backup_rel_path" || return
+        backup_item "$destination" "$BACKUP_DIR/deployment/$backup_rel_path" || return
         rm "$destination"
     fi
 
@@ -183,7 +183,7 @@ deploy_file () {
     ln -rsT "$source" "$destination"
     return
 }
-deploy_file_wsl () {
+deploy_item_wsl () {
     local source="$1"
     local destination="$2"
 
@@ -199,7 +199,7 @@ deploy_file_wsl () {
 
     if [ -e "$destination" ] || [ -L "$destination" ]; then
         local backup_rel_path=$(realpath --relative-to="$REPO_PATH" "$source")
-        backup_file "$destination" "$BACKUP_DIR/deployment/$backup_rel_path" || return
+        backup_item "$destination" "$BACKUP_DIR/deployment/$backup_rel_path" || return
         rm "$destination"
     fi
 
@@ -208,7 +208,7 @@ deploy_file_wsl () {
     cp -a -T "$source" "$destination"
     return
 }
-move_over_file () {
+move_over_item () {
     local source="$1"
     local destination="$2"
     local destination_canonical=$(realpath -m "$destination")
@@ -233,7 +233,7 @@ move_over_file () {
         done < "$MOVE_OVER_FILES_PATH"
 
         local destination_name=$(basename "$destination")
-        backup_file "$destination" "$BACKUP_DIR/move-overs/$destination_name" || return
+        backup_item "$destination" "$BACKUP_DIR/move-overs/$destination_name" || return
         rm "$destination"
     fi
 
@@ -255,7 +255,7 @@ set_symlink () {
 
     if [ -e "$link" ] || [ -L "$destination" ]; then
         local link_name=$(basename "$link")
-        backup_file "$link" "$BACKUP_DIR/symlinks/$link_name" || return
+        backup_item "$link" "$BACKUP_DIR/symlinks/$link_name" || return
         rm "$link"
     fi
 

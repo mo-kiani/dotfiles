@@ -31,18 +31,18 @@ if [ "$IM_IN_WSL" = 'true' ]; then
 fi
 
 echo
-deploy_file dotfiles/inputrc ~/.inputrc
+deploy_item dotfiles/inputrc ~/.inputrc
 echo
-move_over_file ~/.bashrc ~/.bashrc_default
-deploy_file dotfiles/bashrc ~/.bashrc
+move_over_item ~/.bashrc ~/.bashrc_default
+deploy_item dotfiles/bashrc ~/.bashrc
 echo
-deploy_file dotfiles/ssh/config ~/.ssh/config
+deploy_item dotfiles/ssh/config ~/.ssh/config
 echo
-deploy_file dotfiles/tmux.conf ~/.tmux.conf
+deploy_item dotfiles/tmux.conf ~/.tmux.conf
 echo
-deploy_file dotfiles/vimrc ~/.vimrc
+deploy_item dotfiles/vimrc ~/.vimrc
 echo
-deploy_file dotfiles/gitconfig ~/.gitconfig
+deploy_item dotfiles/gitconfig ~/.gitconfig
 echo "Ensuring git config files included in \"~/.gitconfig\" exist (\"~/.gitconfig-private/root\")"
 mkdir -p ~/.gitconfig-private
 touch ~/.gitconfig-private/root
@@ -57,16 +57,16 @@ if [ "$IM_IN_WSL" = 'true' ]; then
     echo
     set_symlink "$MY_WINDOWS_HOME_FOLDER" ~/win
     echo
-    deploy_file_wsl dotfiles/wt/settings.json "$MY_WINDOWS_TERMINAL_FOLDER/settings.json"
+    deploy_item_wsl dotfiles/wt/settings.json "$MY_WINDOWS_TERMINAL_FOLDER/settings.json"
     echo
-    deploy_file_wsl assets/Tux.png "$MY_WINDOWS_HOME_FOLDER/Setup/Tux.png"
+    deploy_item_wsl assets/Tux.png "$MY_WINDOWS_HOME_FOLDER/Setup/Tux.png"
 fi
 
 echo
 echo "Installing 'Oh My Posh!'"
 mkdir -p ~/.oh-my-posh
 curl -s https://ohmyposh.dev/install.sh | bash -s -- -d ~/.oh-my-posh -t ~/.oh-my-posh/themes/built-in
-deploy_file dotfiles/oh-my-posh/themes ~/.oh-my-posh/themes/custom
+deploy_item dotfiles/oh-my-posh/themes ~/.oh-my-posh/themes/custom
 set_symlink custom/mo.omp.json ~/.oh-my-posh/themes/default.omp.json
 set_symlink ~/.oh-my-posh/oh-my-posh ~/.path/oh-my-posh
 

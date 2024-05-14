@@ -99,6 +99,20 @@ else
 fi
 
 echo
+echo "Installing Node Version Manager (NVM)"
+export NVM_DIR="$HOME/.nvm"
+if ! [ -d "$NVM_DIR" ]; then
+    git clone https://github.com/nvm-sh/nvm.git "$NVM_DIR"
+else
+    echo "Directory at \"$NVM_DIR\" already exists. Assuming NVM was previously cloned"
+fi
+(
+    echo "Checking out latest version of NVM"
+    cd "$NVM_DIR"
+    git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" $(git rev-list --tags --max-count=1)`
+)
+
+echo
 prompt_choice CHOICE_NERD_FONT 'Are you using a Nerd Font?' no yes
 if [ "$CHOICE_NERD_FONT" = 'yes' ]; then
     touch ~/.nerdfont_on

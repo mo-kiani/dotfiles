@@ -2,7 +2,7 @@
 
 ### General
 - [ ] Create a blank branch so other people can take advantage of the utilities from the setup process but for their own setup
-    - [ ] Create an extensive README for others who want to use the blank branch
+    - [x] Create an extensive README for others who want to use the blank branch
 
 ### Setup Script
 - [ ] Consider adding color to output as indicator of hierarchy instead of just relying on whitespace since that cannot be controlled for output from commands

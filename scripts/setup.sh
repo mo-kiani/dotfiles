@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Ensure sudo permissions are granted by the invoking user before starting
-sudo true
+sudo true || return 11 2>/dev/null || exit 11
 
 export REPO_PATH=$(realpath "$BASH_SOURCE")
 export REPO_PATH=$(dirname "$REPO_PATH")

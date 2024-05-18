@@ -211,14 +211,6 @@ move_over_item () {
 
     echo "Moving \"$source\" over to \"$destination\""
 
-    if ! [ -e "$source" ]; then
-        echo "Move-over source \"$source\" does not exist. Nothing to move over."
-        return 0
-    fi
-
-    ensure_outside "$source" "$REPO_PATH" || return
-    ensure_outside "$destination" "$REPO_PATH" || return
-
     if [ -e "$destination" ] || [ -L "$destination" ]; then
         local line
         while read line; do
@@ -227,13 +219,24 @@ move_over_item () {
                 return 0
             fi
         done < "$MOVE_OVER_FILES_PATH"
+    fi
 
+    ensure_outside "$source" "$REPO_PATH" || return
+    ensure_outside "$destination" "$REPO_PATH" || return
+
+    if [ -e "$destination" ] || [ -L "$destination" ]; then
         local destination_name=$(basename "$destination")
         backup_item "$destination" "$BACKUP_DIR/move-overs/$destination_name" || return
         rm "$destination"
     fi
 
     echo "$destination_canonical" >> "$MOVE_OVER_FILES_PATH"
+
+    if ! [ -e "$source" ]; then
+        echo "Move-over source \"$source\" does not exist. Nothing to move over."
+        return 0
+    fi
+
     ensure_containing_dir "$destination"
     mv -n -T "$source" "$destination"
     return

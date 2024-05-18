@@ -35,6 +35,8 @@ deploy_item dotfiles/inputrc ~/.inputrc
 echo
 move_over_item ~/.bashrc ~/.bashrc_default
 deploy_item dotfiles/bashrc ~/.bashrc
+echo "Ensuring ~/.bashrc_extras exists. You can use it for additional system-specific configurations that will be sourced at the end of ~/.bashrc"
+touch ~/.bashrc_extras
 echo
 deploy_item dotfiles/ssh/config ~/.ssh/config
 echo

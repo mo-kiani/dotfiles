@@ -211,15 +211,13 @@ move_over_item () {
 
     echo "Moving \"$source\" over to \"$destination\""
 
-    if [ -e "$destination" ] || [ -L "$destination" ]; then
-        local line
-        while read line; do
-            if [ "$line" = "$destination_canonical" ]; then
-                echo "Move-over to destination \"$destination\" (\"$destination_canonical\") previously done."
-                return 0
-            fi
-        done < "$MOVE_OVER_FILES_PATH"
-    fi
+    local line
+    while read line; do
+        if [ "$line" = "$destination_canonical" ]; then
+            echo "Move-over to destination \"$destination\" (\"$destination_canonical\") previously done."
+            return 0
+        fi
+    done < "$MOVE_OVER_FILES_PATH"
 
     ensure_outside "$source" "$REPO_PATH" || return
     ensure_outside "$destination" "$REPO_PATH" || return

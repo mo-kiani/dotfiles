@@ -1,0 +1,402 @@
+{
+    "workbench.colorTheme": "Gruvbox Dark Medium",
+    "workbench.colorCustomizations": {
+        "editorBracketHighlight.foreground1": "#689D6A",
+        "editorBracketHighlight.foreground2": "#D79921",
+        "editorBracketHighlight.foreground3": "#B16286",
+        "editorBracketHighlight.foreground4": "#458588",
+        "editorBracketHighlight.foreground5": "#D65D0E",
+        "editorBracketHighlight.foreground6": "#98971A",
+        "editorBracketHighlight.unexpectedBracket.foreground": "#CC241D",
+        "statusBar.background": "#282828",
+        "statusBar.noFolderBackground": "#282828",
+        "statusBar.debuggingBackground": "#282828",
+        "statusBar.foreground": "#EBDBB2",
+        "statusBar.debuggingForeground": "#EBDBB2",
+        "[Gruvbox*]": {
+            "editorStickyScroll.border": "#3C3638",
+            "editorStickyScrollHover.background": "#1d2021"
+        },
+        "titleBar.activeBackground": "#282828",
+        "titleBar.inactiveBackground": "#28282899",
+        "commandCenter.border": "#ebdbb299",
+        "titleBar.activeForeground": "#ebdbb2",
+        "titleBar.inactiveForeground": "#ebdbb299"
+    },
+    "peacock.favoriteColors": [
+        {
+            "name": "Gruvbox Aqua",
+            "value": "#689D6A"
+        },
+        {
+            "name": "Gruvbox Purple",
+            "value": "#B16286"
+        },
+        {
+            "name": "Gruvbox Yellow",
+            "value": "#D79921"
+        },
+        {
+            "name": "Gruvbox Blue",
+            "value": "#458588"
+        },
+        {
+            "name": "Gruvbox Orange",
+            "value": "#D65D0E"
+        },
+        {
+            "name": "Gruvbox Green",
+            "value": "#98971A"
+        },
+        {
+            "name": "Gruvbox Red",
+            "value": "#CC241D"
+        },
+        {
+            "name": "Gruvbox Black",
+            "value": "#282828"
+        },
+        {
+            "name": "Gruvbox Gray",
+            "value": "#A89984"
+        }
+    ],
+
+    "todo-tree.tree.tooltipFormat": "${after}",
+    "todo-tree.general.tags": [
+        "TODO",
+        "FIXME",
+        "BUG",
+        "HACK",
+        "HELP",
+        "INFO",
+        "IDEA",
+        "PIN",
+        "[ ]",
+        "[x]",
+    ],
+    "todo-tree.highlights.defaultHighlight": {
+        "type": "line",
+        "icon": "screen-full",
+        "foreground": "black",
+        "background": "#CC241D",
+        "iconColour": "#CC241D",
+        "gutterIcon": true,
+    },
+    "todo-tree.highlights.customHighlight": {
+        "TODO": {
+            "background": "#D79921",
+            "icon": "paper-airplane",
+            "iconColour": "#D79921",
+        },
+        "FIXME": {
+            "background": "#CC241D",
+            "icon": "alert",
+            "iconColour": "#CC241D",
+        },
+        "BUG": {
+            "background": "#CC241D",
+            "icon": "bug",
+            "iconColour": "#CC241D",
+        },
+        "HACK": {
+            "background": "#D65D0E",
+            "icon": "tools",
+            "iconColour": "#D65D0E",
+        },
+        "HELP": {
+            "background": "#689D6A",
+            "icon": "gift",
+            "iconColour": "#689D6A",
+        },
+        "INFO": {
+            "background": "#458588",
+            "icon": "note",
+            "iconColour": "#458588",
+        },
+        "IDEA": {
+            "background": "#B16286",
+            "icon": "light-bulb",
+            "iconColour": "#B16286",
+        },
+        "PIN": {
+            "background": "#D79921",
+            "icon": "pin",
+            "iconColour": "#D79921",
+        },
+        "[ ]": {
+            "background": "#D79921",
+            "icon": "circle",
+            "iconColour": "#D79921",
+        },
+        "[x]": {
+            "background": "#98971A",
+            "icon": "check-circle-fill",
+            "iconColour": "#98971A",
+        }
+    },
+
+    "editor.lineNumbers": "on",
+    "terminal.integrated.defaultProfile.windows": "Ubuntu (WSL)",
+    "terminal.integrated.defaultProfile.linux": "bash",
+    "python.defaultInterpreterPath": "C:\\Users\\Mo\\AppData\\Local\\Microsoft\\WindowsApps\\python3.9.exe",
+    "vim.smartRelativeLine": true,
+    "vim.hlsearch": true,
+    "vim.showMarksInGutter": true,
+    "vim.statusBarColorControl": true,
+    // Colors for Gruvbox Dark
+    "vim.statusBarColors.normal": [
+        "#282828",
+        "#EBDBB2"
+    ],
+    "vim.statusBarColors.insert": [
+        "#458588",
+        "#EBDBB2"
+    ],
+    "vim.statusBarColors.visual": [
+        "#D65D0E",
+        "#EBDBB2"
+    ],
+    "vim.statusBarColors.visualline": [
+        "#D65D0E",
+        "#EBDBB2"
+    ],
+    "vim.statusBarColors.visualblock": [
+        "#D65D0E",
+        "#EBDBB2"
+    ],
+    "vim.statusBarColors.replace": [
+        "#689D6A",
+        "#EBDBB2"
+    ],
+    "vim.statusBarColors.commandlineinprogress": [
+        "#B16286",
+        "#EBDBB2"
+    ],
+    "vim.statusBarColors.searchinprogressmode": [
+        "#D79921",
+        "#282828"
+    ],
+    "git-graph.repository.commits.fetchAvatars": true,
+    "git-graph.repository.commits.mute.commitsThatAreNotAncestorsOfHead": true,
+    "git-graph.repository.commits.mute.mergeCommits": false,
+    "git-graph.repository.commits.loadMore": 300,
+    "git-graph.repository.commits.showSignatureStatus": true,
+    "git-graph.repository.onLoad.scrollToHead": true,
+    "git-graph.repository.sign.commits": true,
+    "git-graph.repository.sign.tags": true,
+    "git-graph.graph.colours": [
+        "#458588",
+        "#D79921",
+        "#B16286",
+        "#D65D0E",
+        "#689D6A",
+        "#CC241D",
+        "#98971A",
+        "#83A598",
+        "#FABD2F",
+        "#D3869B",
+        "#FE8019",
+        "#8EC07C",
+        "#FB4934",
+        "#B8BB26",
+        "#0085d9",
+        "#d9008f",
+        "#00d90a",
+        "#d98500",
+        "#a300d9",
+        "#ff0000",
+        "#00d9cc",
+        "#e138e8",
+        "#85d900",
+        "#dc5b23",
+        "#6f24d6",
+        "#ffcc00"
+    ],
+    "telemetry.telemetryLevel": "error",
+    "scm.defaultViewMode": "tree",
+    "markdown.extension.print.theme": "dark",
+    "markdown-preview-enhanced.automaticallyShowPreviewOfMarkdownBeingEdited": true,
+    "markdown-preview-enhanced.breakOnSingleNewLine": false,
+    "markdown-preview-enhanced.codeBlockTheme": "github.css",
+    "markdown-preview-enhanced.enableLinkify": false,
+    "markdown-preview-enhanced.previewTheme": "atom-material.css",
+    "vsicons.presets.jsOfficial": true,
+    "vsicons.presets.tsOfficial": true,
+    "vsicons.presets.nestjs": true,
+    "editor.linkedEditing": true,
+    "color-highlight.markerType": "foreground",
+    "editor.bracketPairColorization.enabled": true,
+    "codesnap.backgroundColor": "#458588",
+    "codesnap.boxShadow": "rgba(0, 0, 0, 0.55) 4px 6px 24px",
+    "peacock.darkForegroundColor": "#282828",
+    "peacock.lightForegroundColor": "#EBDBB2",
+    "todo-tree.filtering.includeHiddenFiles": true,
+    "todo-tree.general.enableFileWatcher": true,
+    "todo-tree.general.statusBar": "current file",
+    "todo-tree.general.statusBarClickBehaviour": "toggle highlights",
+    "todo-tree.highlights.enabled": true,
+    "editor.cursorSurroundingLines": 999,
+    "todo-tree.tree.showCountsInTree": true,
+    "todo-tree.tree.expanded": true,
+    "todo-tree.regex.enableMultiLine": true,
+    "todo-tree.tree.groupedByTag": true,
+    "rest-client.enableTelemetry": false,
+    "rest-client.previewResponsePanelTakeFocus": false,
+    "rest-client.requestNameAsResponseTabTitle": true,
+    "editor.guides.bracketPairs": true,
+    "quokka.automaticRestart": true,
+    "rest-client.previewResponseInUntitledDocument": true,
+    "fileutils.typeahead.enabled": false,
+    "terminal.integrated.commandsToSkipShell": [
+        "workbench.action.terminal.rename",
+        "workbench.action.terminal.openDetectedLink",
+        "workbench.action.toggleMaximizedPanel",
+        "workbench.action.terminal.new",
+        "workbench.action.createTerminalEditor",
+        "workbench.action.terminal.split",
+        "workbench.action.terminal.toggleTerminal",
+        "workbench.action.terminal.focusNext",
+        "workbench.action.terminal.focusNextPane",
+        "workbench.action.terminal.focusPrevious",
+        "workbench.action.terminal.focusPreviousPane",
+        "workbench.action.terminal.focusTabs",
+        "workbench.action.nextPanelView",
+        "workbench.action.previousPanelView",
+        "workbench.action.focusSideBar",
+        "workbench.view.explorer",
+        "workbench.view.search",
+        "workbench.scm.action.focusNextResourceGroup",
+        "workbench.action.focusActiveEditorGroup",
+        "workbench.action.quickOpen",
+        "workbench.action.quickOpenPreviousRecentlyUsedEditor",
+        "workbench.action.quickOpenLeastRecentlyUsedEditor",
+        "workbench.action.terminal.scrollDown",
+        "workbench.action.terminal.scrollUp",
+        "workbench.action.terminal.scrollToPreviousCommand",
+        "workbench.action.terminal.scrollToNextCommand",
+        "workbench.action.showCommands",
+        "workbench.action.terminal.killEditor",
+        "workbench.action.terminal.kill",
+        "workbench.action.splitEditorToRightGroup",
+        "workbench.action.splitEditorToLeftGroup",
+        "workbench.action.splitEditorToBelowGroup",
+        "workbench.action.splitEditorToAboveGroup",
+        "workbench.action.previousEditorInGroup",
+        "workbench.action.nextEditorInGroup",
+        "workbench.action.moveEditorToRightGroup",
+        "workbench.action.moveEditorToLeftGroup",
+        "workbench.action.moveEditorToBelowGroup",
+        "workbench.action.moveEditorToAboveGroup",
+        "workbench.action.focusPreviousGroup",
+        "workbench.action.focusNextGroup",
+        "workbench.action.closeGroup",
+        "workbench.action.togglePanel"
+    ],
+    "window.title": "${dirty} ${rootName}${separator}${activeFolderMedium}${separator}${activeEditorShort} ${dirty}",
+    "window.titleSeparator": " -- ",
+    "window.restoreWindows": "preserve",
+    "workbench.editor.highlightModifiedTabs": true,
+    "terminal.integrated.profiles.windows": {
+        "PowerShell": {
+            "source": "PowerShell",
+            "icon": "terminal-powershell"
+        },
+        "Command Prompt": {
+            "path": [
+                "${env:windir}\\Sysnative\\cmd.exe",
+                "${env:windir}\\System32\\cmd.exe"
+            ],
+            "args": [],
+            "icon": "terminal-cmd"
+        },
+        "Git Bash": {
+            "source": "Git Bash"
+        },
+        "Ubuntu (WSL)": {
+            "path": "C:\\Windows\\System32\\wsl.exe",
+            "args": [
+                "-d",
+                "Ubuntu"
+            ]
+        }
+    },
+    "security.allowedUNCHosts": [
+        "wsl.localhost"
+    ],
+    "editor.fontFamily": "SauceCodePro Nerd Font Mono, Consolas, 'Courier New', monospace",
+    "workbench.iconTheme": "vscode-icons",
+    "files.associations": {
+        "**/.ssh/config": "ssh_config",
+        "**/.ssh/private/config/*": "ssh_config"
+    },
+    "terminal.integrated.profiles.linux": {
+        "bash": {
+            "path": "bash",
+            "icon": "terminal-bash"
+        },
+        "zsh": {
+            "path": "zsh"
+        },
+        "fish": {
+            "path": "fish"
+        },
+        "tmux": {
+            "path": "tmux",
+            "icon": "terminal-tmux"
+        },
+        "pwsh": {
+            "path": "pwsh",
+            "icon": "terminal-powershell"
+        }
+    },
+    "terminal.integrated.tabs.title": "${sequence}",
+    "terminal.integrated.fontFamily": "SauceCodePro Nerd Font Mono, Consolas, 'Courier New', monospace",
+    "editor.stickyTabStops": true,
+    "terminal.integrated.tabStopWidth": 4,
+    "terminal.integrated.enableImages": true,
+    "terminal.integrated.enableVisualBell": true,
+    "terminal.integrated.bellDuration": 1200,
+    "accessibility.signals.terminalBell": {
+        "sound": "on"
+    },
+    "terminal.integrated.tabs.hideCondition": "never",
+    "terminal.integrated.tabs.showActiveTerminal": "always",
+    "terminal.integrated.tabs.showActions": "always",
+    "files.simpleDialog.enable": true,
+    "editor.rulers": [ 0, 80, 120 ],
+    "workbench.activityBar.location": "top",
+    "window.menuBarVisibility": "toggle",
+    "zenMode.showTabs": "single",
+    "terminal.external.windowsExec": "wt.exe",
+    "liveServer.settings.CustomBrowser": "firefox:PrivateMode",
+    "codesnap.showWindowControls": false,
+    "codesnap.transparentBackground": true,
+    "explorer.fileNesting.patterns": {
+        "*.ts": "${capture}.js",
+        "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
+        "*.jsx": "${capture}.js",
+        "*.tsx": "${capture}.ts",
+        "tsconfig.json": "tsconfig.*.json",
+        "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb",
+        "*.sqlite": "${capture}.${extname}-*",
+        "*.db": "${capture}.${extname}-*",
+        "*.sqlite3": "${capture}.${extname}-*",
+        "*.db3": "${capture}.${extname}-*",
+        "*.sdb": "${capture}.${extname}-*",
+        "*.s3db": "${capture}.${extname}-*"
+    },
+    "terminal.integrated.scrollback": 10000,
+    "window.newWindowDimensions": "maximized",
+    "terminal.integrated.persistentSessionReviveProcess": "never",
+    "terminal.integrated.confirmOnExit": "hasChildProcesses",
+    "files.hotExit": "onExitAndWindowClose",
+    "window.confirmBeforeClose": "keyboardOnly",
+    "terminal.integrated.env.windows": {
+        "WSLENV": "TERM_PROGRAM:${env:WSLENV}"
+    },
+    "peacock.affectSashHover": false,
+    "peacock.affectStatusBar": false,
+    "peacock.showColorInStatusBar": false,
+    "peacock.affectActivityBar": false
+}

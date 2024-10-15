@@ -399,5 +399,6 @@
     "peacock.affectStatusBar": false,
     "peacock.showColorInStatusBar": false,
     "peacock.affectActivityBar": false,
-    "terminal.integrated.minimumContrastRatio": 1
+    "terminal.integrated.minimumContrastRatio": 1,
+    "terminal.integrated.gpuAcceleration": "off"
 }

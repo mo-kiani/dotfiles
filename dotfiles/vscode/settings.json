@@ -398,5 +398,6 @@
     "peacock.affectSashHover": false,
     "peacock.affectStatusBar": false,
     "peacock.showColorInStatusBar": false,
-    "peacock.affectActivityBar": false
+    "peacock.affectActivityBar": false,
+    "terminal.integrated.minimumContrastRatio": 1
 }

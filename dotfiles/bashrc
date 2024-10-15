@@ -107,10 +107,10 @@ fi
 
 # Set variable indicating what terminal bash is running in
 export MY_TERM="unknown"
-if [[ -n "$WT_SESSION" ]]; then
-  export MY_TERM="wt"
-elif [ $TERM_PROGRAM = 'vscode' ]; then
+if [ "$TERM_PROGRAM" = 'vscode' ]; then
   export MY_TERM="vscode"
+elif [ -n "$WT_SESSION" ]; then
+  export MY_TERM="wt"
 fi
 
 # Provide a hook to add more bashrc configurations on a per-system basis while

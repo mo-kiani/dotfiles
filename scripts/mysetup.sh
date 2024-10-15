@@ -35,6 +35,9 @@ deploy_item dotfiles/inputrc ~/.inputrc
 echo
 move_over_item ~/.bashrc ~/.bashrc_default
 deploy_item dotfiles/bashrc ~/.bashrc
+echo
+move_over_item ~/.bash_profile ~/.bash_profile_default
+deploy_item dotfiles/bash_profile ~/.bash_profile
 echo "Ensuring ~/.bashrc_extras exists. You can use it for additional system-specific configurations that will be sourced at the end of ~/.bashrc"
 touch ~/.bashrc_extras
 echo

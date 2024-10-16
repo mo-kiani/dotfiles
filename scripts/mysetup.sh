@@ -33,6 +33,8 @@ fi
 echo
 deploy_item dotfiles/inputrc ~/.inputrc
 echo
+deploy_item dotfiles/gnupg/gpg-agent.conf ~/.gnupg/gpg-agent.conf
+echo
 move_over_item ~/.bashrc ~/.bashrc_default
 deploy_item dotfiles/bashrc ~/.bashrc
 echo

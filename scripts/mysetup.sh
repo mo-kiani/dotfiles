@@ -31,9 +31,18 @@ if [ "$IM_IN_WSL" = 'true' ]; then
 fi
 
 echo
+echo "Creating folder ~/.path, which bashrc will append to \$PATH"
+mkdir -p ~/.path
+
+echo
 deploy_item dotfiles/inputrc ~/.inputrc
 echo
-deploy_item dotfiles/gnupg/gpg-agent.conf ~/.gnupg/gpg-agent.conf
+if [ "$IM_IN_WSL" = 'true' ]; then
+    deploy_item dotfiles/gnupg/pinentry-wsl.sh ~/.path/pinentry-wsl.sh
+    deploy_item dotfiles/gnupg/gpg-agent-wsl.conf ~/.gnupg/gpg-agent.conf
+else
+    deploy_item dotfiles/gnupg/gpg-agent.conf ~/.gnupg/gpg-agent.conf
+fi
 echo
 move_over_item ~/.bashrc ~/.bashrc_default
 deploy_item dotfiles/bashrc ~/.bashrc
@@ -53,10 +62,6 @@ deploy_item dotfiles/gitconfig ~/.gitconfig
 echo "Ensuring git config files included in \"~/.gitconfig\" exist (\"~/.gitconfig-private/root\")"
 mkdir -p ~/.gitconfig-private
 touch ~/.gitconfig-private/root
-
-echo
-echo "Creating folder ~/.path, which bashrc will append to \$PATH"
-mkdir -p ~/.path
 
 if [ "$IM_IN_WSL" = 'true' ]; then
     export MY_WINDOWS_HOME_FOLDER=$(wslpath "$(wslvar 'UserProfile')")

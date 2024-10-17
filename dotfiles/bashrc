@@ -13,6 +13,9 @@ if command -v tty &> /dev/null; then
 else
   echo "command 'tty' is unavailable and so \$GPG_TTY could not be set properly to ensure that GPG functions properly"
 fi
+# Tell custom pinentry switch script to use TERMINAL version of pinentry
+# Note that "PINENTRY_USER_DATA" is a special variable that gets passed in by the relevant tooling
+export PINENTRY_USER_DATA="TERMINAL"
 
 # Run ssh-agent
 if command -v ssh-agent &> /dev/null; then

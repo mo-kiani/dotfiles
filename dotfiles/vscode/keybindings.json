@@ -92,7 +92,23 @@
     },
     {
         "key": "shift+alt+m",
-        "command": "markdown.showPreviewToSide",
+        "command": "runCommands",
+        "args": {
+            "commands": [
+                {
+                    "command": "markdown.showPreviewToSide",
+                },
+                {
+                    "command": "workbench.action.focusFirstEditorGroup",
+                },
+                {
+                    "command": "workbench.action.focusFirstEditorGroup",
+                },
+                {
+                    "command": "workbench.action.focusFirstEditorGroup",
+                }
+            ]
+        },
         "when": "!notebookEditorFocused && editorLangId == 'markdown'"
     },
     {
@@ -256,18 +272,8 @@
     },
     {
         "key": "alt+j",
-        "command": "settings.action.focusSettingsFile",
-        "when": "inSettingsSearch && !suggestWidgetVisible"
-    },
-    {
-        "key": "alt+j",
-        "command": "settings.action.focusSettingsFromSearch",
-        "when": "inSettingsSearch && !suggestWidgetVisible"
-    },
-    {
-        "key": "alt+j",
         "command": "showNextParameterHint",
-        "when": "editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible"
+        "when": "editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible && !suggestWidgetVisible"
     },
     {
         "key": "alt+j",
@@ -312,7 +318,7 @@
     {
         "key": "alt+k",
         "command": "showPrevParameterHint",
-        "when": "editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible"
+        "when": "editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible && !suggestWidgetVisible"
     },
     {
         "key": "alt+k",
@@ -348,11 +354,6 @@
         "key": "shift+alt+.",
         "command": "-editor.action.autoFix",
         "when": "editorTextFocus && !editorReadonly && supportedCodeAction =~ /(\\s|^)quickfix\\b/"
-    },
-    {
-        "key": "shift+alt+,",
-        "command": "workbench.action.output.toggleOutput",
-        "when": "workbench.panel.output.active"
     },
     {
         "key": "shift+alt+r",
@@ -460,11 +461,6 @@
     {
         "key": "shift+alt+`",
         "command": "workbench.action.terminal.openNativeConsole"
-    },
-    {
-        "key": "shift+alt+/",
-        "command": "workbench.view.search",
-        "when": "workbench.view.search.active && neverMatch =~ /doesNotMatch/"
     },
     {
         "key": "shift+alt+k",
@@ -740,7 +736,7 @@
         "when": "terminalProcessSupported || terminalWebExtensionContributedProfile"
     },
     {
-        "key": "alt+j",
+        "key": "enter",
         "command": "search.action.focusSearchList",
         "when": "searchInputBoxFocus"
     },
@@ -781,11 +777,13 @@
     },
     {
         "key": "shift+alt+i",
-        "command": "workbench.action.quickOpenLeastRecentlyUsedEditor"
+        "command": "workbench.action.quickOpenLeastRecentlyUsedEditor",
+        "when": "!inQuickOpen"
     },
     {
         "key": "shift+alt+o",
-        "command": "workbench.action.quickOpenPreviousRecentlyUsedEditor"
+        "command": "workbench.action.quickOpenPreviousRecentlyUsedEditor",
+        "when": "!inQuickOpen"
     },
     {
         "key": "shift+alt+o",
@@ -819,7 +817,23 @@
     },
     {
         "key": "shift+alt+m",
-        "command": "livePreview.start.internalPreview.atFile",
+        "command": "runCommands",
+        "args": {
+            "commands": [
+                {
+                    "command": "livePreview.start.internalPreview.atFile",
+                },
+                {
+                    "command": "workbench.action.focusFirstEditorGroup",
+                },
+                {
+                    "command": "workbench.action.focusFirstEditorGroup",
+                },
+                {
+                    "command": "workbench.action.focusFirstEditorGroup",
+                }
+            ]
+        },
         "when": "!notebookEditorFocused && editorLangId == 'html'"
     },
     {
@@ -840,22 +854,22 @@
     {
         "key": "alt+j",
         "command": "workbench.action.compareEditor.nextChange",
-        "when": "textCompareEditorVisible"
+        "when": "textCompareEditorVisible && vim.mode != 'CommandlineInProgress' && !suggestWidgetVisible && !parameterHintsVisible"
     },
     {
         "key": "alt+j",
         "command": "workbench.action.editor.nextChange",
-        "when": "editorTextFocus && !textCompareEditorActive && vim.mode != 'CommandlineInProgress'"
+        "when": "editorTextFocus && !suggestWidgetVisible && !textCompareEditorActive && vim.mode != 'CommandlineInProgress' && !suggestWidgetVisible && !parameterHintsVisible"
     },
     {
         "key": "alt+k",
         "command": "workbench.action.editor.previousChange",
-        "when": "editorTextFocus && !textCompareEditorActive && vim.mode != 'CommandlineInProgress'"
+        "when": "editorTextFocus && !suggestWidgetVisible && !textCompareEditorActive && vim.mode != 'CommandlineInProgress' && !suggestWidgetVisible && !parameterHintsVisible"
     },
     {
         "key": "alt+k",
         "command": "workbench.action.compareEditor.previousChange",
-        "when": "textCompareEditorVisible"
+        "when": "textCompareEditorVisible && vim.mode != 'CommandlineInProgress' && !suggestWidgetVisible && !parameterHintsVisible"
     },
     {
         "key": "alt+h",
@@ -951,7 +965,7 @@
         "when": "debuggersAvailable && disassemblyViewFocus || debuggersAvailable && editorTextFocus"
     },
     {
-        "key": "shift+alt+. shift+alt+m",
+        "key": "shift+alt+. shift+alt+n",
         "command": "editor.debug.action.triggerByBreakpoint",
         "when": "debuggersAvailable && disassemblyViewFocus || debuggersAvailable && editorTextFocus"
     },
@@ -1341,5 +1355,84 @@
     {
         "key": "shift+alt+9",
         "command": "peacock.changeColorToFavorite"
+    },
+    {
+        "key": "shift+alt+m",
+        "command": "edit-csv.edit",
+        "when": "!notebookEditorFocused && editorLangId == 'csv'"
+    },
+    {
+        "key": "shift+alt+;",
+        "command": "workbench.action.showOutputChannels",
+        "when": "inOutput"
+    },
+    {
+        "key": "shift+alt+;",
+        "command": "editor.action.dirtydiff.next",
+        "when": "editorTextFocus && !textCompareEditorActive && !focusedView"
+    },
+    {
+        "key": "shift+alt+,",
+        "command": "editor.action.dirtydiff.previous",
+        "when": "editorTextFocus && !textCompareEditorActive && !focusedView"
+    },
+    {
+        "key": "shift+alt+. shift+alt+m",
+        "command": "editor.debug.action.addLogPoint",
+        "when": "debuggersAvailable && disassemblyViewFocus || debuggersAvailable && editorTextFocus"
+    },
+    {
+        "key": "ctrl+f",
+        "command": "problems.action.focusFilter",
+        "when": "focusedView == 'workbench.panel.markers.view' && !problemsFilterFocus"
+    },
+    {
+        "key": "ctrl+f",
+        "command": "-problems.action.focusFilter",
+        "when": "focusedView == 'workbench.panel.markers.view'"
+    },
+    {
+        "key": "ctrl+f",
+        "command": "problems.action.focusProblemsFromFilter",
+        "when": "problemsFilterFocus"
+    },
+    {
+        "key": "shift+alt+/",
+        "command": "workbench.action.findInFiles"
+    },
+    {
+        "key": "alt+;",
+        "command": "refactorPreview.toggleCheckedState",
+        "when": "listFocus && refactorPreview.enabled && !inputFocus && !treestickyScrollFocused"
+    },
+    {
+        "key": "enter",
+        "command": "refactorPreview.apply",
+        "when": "refactorPreview.enabled && refactorPreview.hasCheckedChanges && focusedView == 'refactorPreview'"
+    },
+    {
+        "key": "escape",
+        "command": "refactorPreview.discard",
+        "when": "refactorPreview.enabled && focusedView == 'refactorPreview'"
+    },
+    {
+        "key": "ctrl+enter",
+        "command": "acceptRenameInput",
+        "when": "editorFocus && renameInputVisible && !isComposing"
+    },
+    {
+        "key": "enter",
+        "command": "-acceptRenameInput",
+        "when": "editorFocus && renameInputVisible && !isComposing"
+    },
+    {
+        "key": "enter",
+        "command": "acceptRenameInputWithPreview",
+        "when": "config.editor.rename.enablePreview && editorFocus && renameInputVisible && !isComposing"
+    },
+    {
+        "key": "ctrl+enter",
+        "command": "-acceptRenameInputWithPreview",
+        "when": "config.editor.rename.enablePreview && editorFocus && renameInputVisible && !isComposing"
     }
 ]

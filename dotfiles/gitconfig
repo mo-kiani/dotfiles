@@ -18,6 +18,9 @@
 [core]
     autocrlf = input
 
+[pager]
+    status = true
+
 # Include more configurations from a designated location.
 # This is useful for keeping configurations out of version control in case they
 # contain sensitive information or belong only to specific systems.

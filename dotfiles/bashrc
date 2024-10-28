@@ -88,6 +88,8 @@ fi
 
 # Add timestamps to history
 export HISTTIMEFORMAT="  %Y/%m/%d %H:%M:%S    "
+export HISTSIZE=1000000
+export HISTFILESIZE=1000000
 
 # Handy Aliases
 alias django="python manage.py"  # Run Django management commands easily

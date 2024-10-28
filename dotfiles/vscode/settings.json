@@ -163,7 +163,9 @@
         "workbench.action.focusPreviousGroup",
         "workbench.action.focusNextGroup",
         "workbench.action.closeGroup",
-        "workbench.action.togglePanel"
+        "workbench.action.togglePanel",
+        "workbench.action.terminal.copyLastCommand",
+        "workbench.action.terminal.copyLastCommandOutput"
     ],
     "window.title": "${rootName}${separator}${activeEditorMedium}",
     "window.restoreWindows": "preserve",
@@ -171,6 +173,7 @@
     "terminal.integrated.profiles.windows": {
         "PowerShell": {
             "source": "PowerShell",
+            "color": "terminal.ansiBlue",
             "icon": "terminal-powershell"
         },
         "Command Prompt": {
@@ -179,13 +182,18 @@
                 "${env:windir}\\System32\\cmd.exe"
             ],
             "args": [],
+            "color": "terminal.ansiWhite",
             "icon": "terminal-cmd"
         },
         "Git Bash": {
-            "source": "Git Bash"
+            "source": "Git Bash",
+            "color": "terminal.ansiMagenta",
+            "icon": "terminal-bash"
         },
         "Ubuntu (WSL)": {
             "path": "C:\\Windows\\System32\\wsl.exe",
+            "color": "terminal.ansiYellow",
+            "icon": "terminal-ubuntu",
             "args": [
                 "-d",
                 "Ubuntu"
@@ -204,10 +212,12 @@
     "terminal.integrated.profiles.linux": {
         "bash": {
             "path": "bash",
+            "color":"terminal.ansiYellow",
             "icon": "terminal-bash"
         },
         "tmux": {
             "path": "tmux",
+            "color":"terminal.ansiGreen",
             "icon": "terminal-tmux"
         }
     },
@@ -305,5 +315,15 @@
         "-dotfiles.repository",
         "-dotfiles.targetPath",
         "-dev.containers.copyGitConfig"
+    ],
+    "python.terminal.activateEnvironment": false,
+    "search.useIgnoreFiles": false,
+    "liveshare.guestApprovalRequired": true,
+    "liveshare.showInStatusBar": "whileCollaborating",
+    "peacock.vslsJoinColor": "#CC241D",
+    "peacock.vslsShareColor": "#CC241D",
+    "docker.containers.label": "ContainerName",
+    "docker.containers.description": [
+        "Status"
     ]
 }

@@ -366,9 +366,9 @@
         "when": "editorHasRenameProvider && editorTextFocus && !editorReadonly"
     },
     {
-        "key": "shift+alt+h",
+        "key": "h",
         "command": "togglePeekWidgetFocus",
-        "when": "listFocus && (inReferenceSearchEditor || referenceSearchVisible)"
+        "when": "inReferenceSearchEditor && listFocus || listFocus && referenceSearchVisible"
     },
     {
         "key": "ctrl+o",
@@ -559,7 +559,7 @@
         "when": "editorHasReferenceProvider && editorTextFocus && !inReferenceSearchEditor"
     },
     {
-        "key": "shift+alt+l",
+        "key": "shift+alt+k",
         "command": "togglePeekWidgetFocus",
         "when": "editorTextFocus && inReferenceSearchEditor || editorTextFocus && referenceSearchVisible"
     },
@@ -574,13 +574,8 @@
         "when": "editorHasCallHierarchyProvider && editorTextFocus && !inReferenceSearchEditor"
     },
     {
-        "key": "space",
+        "key": "enter",
         "command": "openReference",
-        "when": "listFocus && referenceSearchVisible && !inputFocus && !treeElementCanCollapse && !treeElementCanExpand && !treestickyScrollFocused"
-    },
-    {
-        "key": "shift+space",
-        "command": "openReferenceToSide",
         "when": "listFocus && referenceSearchVisible && !inputFocus && !treeElementCanCollapse && !treeElementCanExpand && !treestickyScrollFocused"
     },
     {
@@ -854,22 +849,22 @@
     {
         "key": "alt+j",
         "command": "workbench.action.compareEditor.nextChange",
-        "when": "textCompareEditorVisible && vim.mode != 'CommandlineInProgress' && !suggestWidgetVisible && !parameterHintsVisible"
+        "when": "textCompareEditorVisible && !parameterHintsVisible && !suggestWidgetVisible && vim.mode != 'CommandlineInProgress' && !codeActionMenuVisible"
     },
     {
         "key": "alt+j",
         "command": "workbench.action.editor.nextChange",
-        "when": "editorTextFocus && !suggestWidgetVisible && !textCompareEditorActive && vim.mode != 'CommandlineInProgress' && !suggestWidgetVisible && !parameterHintsVisible"
+        "when": "editorTextFocus && !parameterHintsVisible && !suggestWidgetVisible && !textCompareEditorActive && vim.mode != 'CommandlineInProgress' && !codeActionMenuVisible"
     },
     {
         "key": "alt+k",
         "command": "workbench.action.editor.previousChange",
-        "when": "editorTextFocus && !suggestWidgetVisible && !textCompareEditorActive && vim.mode != 'CommandlineInProgress' && !suggestWidgetVisible && !parameterHintsVisible"
+        "when": "editorTextFocus && !parameterHintsVisible && !suggestWidgetVisible && !textCompareEditorActive && vim.mode != 'CommandlineInProgress' && !codeActionMenuVisible"
     },
     {
         "key": "alt+k",
         "command": "workbench.action.compareEditor.previousChange",
-        "when": "textCompareEditorVisible && vim.mode != 'CommandlineInProgress' && !suggestWidgetVisible && !parameterHintsVisible"
+        "when": "textCompareEditorVisible && !parameterHintsVisible && !suggestWidgetVisible && vim.mode != 'CommandlineInProgress' && !codeActionMenuVisible"
     },
     {
         "key": "alt+h",
@@ -1367,16 +1362,6 @@
         "when": "inOutput"
     },
     {
-        "key": "shift+alt+;",
-        "command": "editor.action.dirtydiff.next",
-        "when": "editorTextFocus && !textCompareEditorActive && !focusedView"
-    },
-    {
-        "key": "shift+alt+,",
-        "command": "editor.action.dirtydiff.previous",
-        "when": "editorTextFocus && !textCompareEditorActive && !focusedView"
-    },
-    {
         "key": "shift+alt+. shift+alt+m",
         "command": "editor.debug.action.addLogPoint",
         "when": "debuggersAvailable && disassemblyViewFocus || debuggersAvailable && editorTextFocus"
@@ -1434,5 +1419,56 @@
         "key": "ctrl+enter",
         "command": "-acceptRenameInputWithPreview",
         "when": "config.editor.rename.enablePreview && editorFocus && renameInputVisible && !isComposing"
+    },
+    {
+        "key": "alt+j",
+        "command": "selectNextCodeAction",
+        "when": "codeActionMenuVisible"
+    },
+    {
+        "key": "alt+k",
+        "command": "selectPrevCodeAction",
+        "when": "codeActionMenuVisible"
+    },
+    {
+        "key": "enter",
+        "command": "-revealReference",
+        "when": "listFocus && referenceSearchVisible && !inputFocus && !treeElementCanCollapse && !treeElementCanExpand && !treestickyScrollFocused"
+    },
+    {
+        "key": "l",
+        "command": "revealReference",
+        "when": "listFocus && referenceSearchVisible && !inputFocus && !treeElementCanCollapse && !treeElementCanExpand && !treestickyScrollFocused"
+    },
+    {
+        "key": "t",
+        "command": "openInIntegratedTerminal",
+        "when": "filesExplorerFocus && foldersViewVisible && !inputFocus"
+    },
+    {
+        "key": "shift+alt+y shift+alt+]",
+        "command": "workbench.action.increaseViewWidth"
+    },
+    {
+        "key": "shift+alt+y shift+alt+[",
+        "command": "workbench.action.decreaseViewWidth"
+    },
+    {
+        "key": "shift+alt+y shift+alt+-",
+        "command": "workbench.action.decreaseViewSize"
+    },
+    {
+        "key": "shift+alt+y shift+alt+=",
+        "command": "workbench.action.increaseViewSize"
+    },
+    {
+        "key": "shift+alt+m",
+        "command": "workbench.action.terminal.copyLastCommandOutput",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "alt+m",
+        "command": "workbench.action.terminal.copyLastCommand",
+        "when": "terminalFocus"
     }
 ]

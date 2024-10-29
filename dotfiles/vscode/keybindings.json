@@ -449,9 +449,9 @@
         "when": "breadcrumbsPossible && breadcrumbsVisible && !breadcrumbsActive"
     },
     {
-        "key": "shift+alt+f",
+        "key": "f",
         "command": "list.find",
-        "when": "listFocus && listSupportsFind"
+        "when": "!inputFocus && filesExplorerFocus && listFocus && listSupportsFind"
     },
     {
         "key": "shift+alt+'",
@@ -627,10 +627,6 @@
         "key": "shift+alt+l",
         "command": "workbench.action.nextSideBarView",
         "when": "sideBarFocus"
-    },
-    {
-        "key": "shift+alt+g",
-        "command": "workbench.scm.action.focusNextResourceGroup"
     },
     {
         "key": "shift+alt+a",
@@ -1013,10 +1009,6 @@
         "command": "workbench.action.newWindow"
     },
     {
-        "key": "shift+alt+y shift+alt+k",
-        "command": "opensshremotes.openEmptyWindow"
-    },
-    {
         "key": "shift+alt+y shift+alt+l",
         "command": "workbench.action.remote.close",
         "when": "workbenchState == 'empty' && remoteName == 'wsl'"
@@ -1124,24 +1116,12 @@
         "when": "workbenchState == 'empty' && remoteName != 'wsl'"
     },
     {
-        "key": "shift+alt+y shift+alt+o",
-        "command": "workbench.action.files.openFolderInNewWindow"
-    },
-    {
         "key": "shift+alt+y shift+alt+a",
         "command": "workbench.action.addRootFolder"
     },
     {
         "key": "shift+alt+y shift+alt+s",
         "command": "workbench.action.saveWorkspaceAs"
-    },
-    {
-        "key": "shift+alt+y shift+alt+;",
-        "command": "remote-tunnels.connectNewWindowToTunnel"
-    },
-    {
-        "key": "shift+alt+y shift+alt+m",
-        "command": "workbench.action.openWorkspaceInNewWindow"
     },
     {
         "key": "shift+alt+y shift+alt+w",
@@ -1272,10 +1252,6 @@
         "command": "vscode-docker.views.dockerContexts.focus"
     },
     {
-        "key": "shift+alt+d 7",
-        "command": "vscode-docker.containers.refresh"
-    },
-    {
         "key": "shift+alt+d alt+t",
         "command": "vscode-docker.images.tag"
     },
@@ -1320,6 +1296,10 @@
         "command": "vscode-docker.pruneSystem"
     },
     {
+        "key": "shift+alt+d 7",
+        "command": "vscode-docker.containers.refresh"
+    },
+    {
         "key": "shift+alt+d 8",
         "command": "vscode-docker.images.refresh"
     },
@@ -1338,6 +1318,46 @@
     {
         "key": "shift+alt+d =",
         "command": "vscode-docker.contexts.refresh"
+    },
+    {
+        "key": "shift+alt+d shift+alt+r",
+        "command": "runCommands",
+        "args": {
+            "commands": [
+                {
+                    "command": "vscode-docker.containers.refresh"
+                },
+                {
+                    "command": "vscode-docker.images.refresh"
+                },
+                {
+                    "command": "vscode-docker.volumes.refresh"
+                },
+                {
+                    "command": "vscode-docker.networks.refresh"
+                },
+                {
+                    "command": "vscode-docker.registries.refresh"
+                },
+                {
+                    "command": "vscode-docker.contexts.refresh"
+                }
+            ]
+        }
+    },
+    {
+        "key": "shift+alt+g shift+alt+r",
+        "command": "runCommands",
+        "args": {
+            "commands": [
+                {
+                    "command": "pr.refreshList"
+                },
+                {
+                    "command": "issue.refresh"
+                }
+            ]
+        }
     },
     {
         "key": "shift+alt+d shift+alt+s",
@@ -1470,5 +1490,69 @@
         "key": "alt+m",
         "command": "workbench.action.terminal.copyLastCommand",
         "when": "terminalFocus"
+    },
+    {
+        "key": "shift+alt+;",
+        "command": "workbench.action.focusOtherSideEditor",
+        "when": "!focusedView"
+    },
+    {
+        "key": "shift+alt+y shift+alt+\\",
+        "command": "workbench.action.toggleMaximizeEditorGroup",
+        "when": "editorPartMaximizedEditorGroup || editorPartMultipleEditorGroups"
+    },
+    {
+        "key": "shift+alt+f",
+        "command": "list.find",
+        "when": "listFocus && listSupportsFind"
+    },
+    {
+        "key": "shift+alt+y shift+alt+k",
+        "command": "opensshremotes.openEmptyWindowInCurrentWindow"
+    },
+    {
+        "key": "shift+alt+y shift+alt+;",
+        "command": "remote-tunnels.connectCurrentWindowToTunnel"
+    },
+    {
+        "key": "shift+alt+y shift+alt+o",
+        "command": "workbench.action.files.openFolder",
+        "when": "openFolderWorkspaceSupport"
+    },
+    {
+        "key": "shift+alt+y shift+alt+m",
+        "command": "workbench.action.openWorkspace"
+    },
+    {
+        "key": "shift+alt+g shift+alt+g",
+        "command": "workbench.scm.focus"
+    },
+    {
+        "key": "shift+alt+g shift+alt+h",
+        "command": "workbench.scm.history.focus"
+    },
+    {
+        "key": "shift+alt+g shift+alt+;",
+        "command": "pr:github.focus"
+    },
+    {
+        "key": "shift+alt+g shift+alt+k",
+        "command": "issues:github.focus"
+    },
+    {
+        "key": "shift+alt+g shift+alt+p",
+        "command": "pr.create"
+    },
+    {
+        "key": "shift+alt+g shift+alt+i",
+        "command": "issue.createIssue"
+    },
+    {
+        "key": "shift+alt+g shift+alt+l",
+        "command": "issuesAndMrs.focus"
+    },
+    {
+        "key": "shift+alt+g shift+alt+j",
+        "command": "currentBranchInfo.focus"
     }
 ]

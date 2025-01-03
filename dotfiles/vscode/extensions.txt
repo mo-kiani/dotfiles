@@ -39,3 +39,4 @@ pucelle.vscode-css-navigation
 qwtel.sqlite-viewer
 vscode-icons-team.vscode-icons
 vscodevim.vim
+formulahendry.auto-rename-tag

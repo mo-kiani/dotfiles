@@ -109,7 +109,7 @@
     "vsicons.presets.jsonOfficial": false,
     "vsicons.presets.angular": true,
     "vsicons.presets.nestjs": true,
-    "editor.linkedEditing": true,
+    "editor.linkedEditing": false,
     "editor.bracketPairColorization.enabled": true,
     "codesnap.backgroundColor": "#458588",
     "codesnap.boxShadow": "rgba(0, 0, 0, 0.55) 4px 6px 24px",

@@ -326,5 +326,6 @@
     "docker.containers.label": "ContainerName",
     "docker.containers.description": [
         "Status"
-    ]
+    ],
+    "chat.commandCenter.enabled": false
 }

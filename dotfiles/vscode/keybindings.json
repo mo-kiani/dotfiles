@@ -1554,5 +1554,15 @@
     {
         "key": "shift+alt+g shift+alt+j",
         "command": "currentBranchInfo.focus"
+    },
+    {
+        "key": "l",
+        "command": "nextCompressedFolder",
+        "when": "explorerViewletCompressedFocus && filesExplorerFocus && foldersViewVisible && !explorerViewletCompressedLastFocus && !inputFocus"
+    },
+    {
+        "key": "h",
+        "command": "previousCompressedFolder",
+        "when": "explorerViewletCompressedFocus && filesExplorerFocus && foldersViewVisible && !explorerViewletCompressedFirstFocus && !inputFocus"
     }
 ]

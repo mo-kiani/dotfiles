@@ -24,6 +24,8 @@ install_package neofetch || true
 echo
 install_package figlet || true
 echo
+install_package unzip || true
+echo
 install_package unicode || true
 if [ "$IM_IN_WSL" = 'true' ]; then
     echo

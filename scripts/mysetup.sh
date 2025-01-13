@@ -77,6 +77,8 @@ if [ "$IM_IN_WSL" = 'true' ]; then
     deploy_item_wsl "dotfiles/wt/Windows Terminal Quake Mode Minimized.lnk" "$MY_WINDOWS_STARTUP_FOLDER/Windows Terminal Quake Mode Minimized.lnk"
     echo
     deploy_item_wsl assets/Tux.png "$MY_WINDOWS_HOME_FOLDER/Setup/Tux.png"
+    echo
+    deploy_item_wsl dotfiles/gitconfig-windows "$MY_WINDOWS_HOME_FOLDER/.gitconfig"
 fi
 
 echo

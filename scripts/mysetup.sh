@@ -68,10 +68,13 @@ touch ~/.gitconfig-private/root
 if [ "$IM_IN_WSL" = 'true' ]; then
     export MY_WINDOWS_HOME_FOLDER=$(wslpath "$(wslvar 'UserProfile')")
     export MY_WINDOWS_TERMINAL_FOLDER=$(wslpath "$(wslvar 'LocalAppData')")/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState
+    export MY_WINDOWS_STARTUP_FOLDER=$(wslpath "$(wslvar 'AppData')")/Microsoft/Windows/Start\ Menu/Programs/Startup/
     echo
     set_symlink "$MY_WINDOWS_HOME_FOLDER" ~/win
     echo
     deploy_item_wsl dotfiles/wt/settings.json "$MY_WINDOWS_TERMINAL_FOLDER/settings.json"
+    echo
+    deploy_item_wsl "dotfiles/wt/Windows Terminal Quake Mode Minimized.lnk" "$MY_WINDOWS_STARTUP_FOLDER/Windows Terminal Quake Mode Minimized.lnk"
     echo
     deploy_item_wsl assets/Tux.png "$MY_WINDOWS_HOME_FOLDER/Setup/Tux.png"
 fi
